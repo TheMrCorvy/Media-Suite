@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"lint": "eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss,json}\"",
-		"test": "vitest"
+		"test": "NODE_ENV=test vitest"
 	},
 	"eslintConfig": {
 		"plugins": [
