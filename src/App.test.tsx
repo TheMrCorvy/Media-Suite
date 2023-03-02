@@ -1,6 +1,6 @@
 import { describe, it } from "vitest"
 import { screen, render } from "@testing-library/react"
-import App from "../App"
+import App from "./App"
 
 describe("rendering app", () => {
 	it("renders", () => {
