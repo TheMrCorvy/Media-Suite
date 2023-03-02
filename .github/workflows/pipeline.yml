@@ -44,9 +44,5 @@ jobs:
                   node-version: "16"
             - name: Install dependencies
               run: npm install
-            - uses: actions/download-artifact@v2
-              with:
-                  name: dist
-                  path: dist
             - name: Test
               run: npm run test
