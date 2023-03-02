@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react"
 // import reactLogo from './assets/react.svg'
 
-import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
+// import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
 
 function App() {
 	const [ready, setReady] = useState(false)
 
-	const load = async () => {
-		const ffmpeg = createFFmpeg({ log: true })
+	// const load = async () => {
+	// 	const ffmpeg = createFFmpeg({ log: true })
 
-		await ffmpeg.load()
+	// 	await ffmpeg.load()
 
-		setReady(true)
-	}
+	// 	setReady(true)
+	// }
 
 	useEffect(() => {
-		load()
+		// load()
 	}, [])
 
 	return (
 		<>
-			<h1>hello world!</h1>
+			<h1>Hello World!</h1>
 			{ready ? "ready" : "loading..."}
 		</>
 	)
