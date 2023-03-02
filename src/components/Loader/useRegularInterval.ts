@@ -13,7 +13,7 @@ const useRegularIntervals = ({ growingValue, time, maxLimit }: Props) => {
 	const intervalTime = time && time > 0 ? time : 1000
 	const limit = maxLimit && maxLimit > 0 && maxLimit <= 100 ? maxLimit : 90
 
-	const [progress, setProgress] = useState(intervalValue)
+	const [progress, setProgress] = useState(0)
 
 	useEffect(() => {
 		const timer = setInterval(() => {
