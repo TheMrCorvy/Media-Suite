@@ -14,15 +14,15 @@ function App() {
 	const { ready, load } = useFfmpeg()
 
 	const props: CustomProps = {
-		title: 'Testing dialog button trigger',
+		title: "Testing dialog button trigger",
 		trigger: {
-			type: 'Button',
-			color: 'primary',
-			size: 'small',
-			variant: 'contained',
-			tooltipPlacement: 'top',
-			tooltipTitle: 'Testing button trigger'
-		}
+			type: "Button",
+			color: "primary",
+			size: "small",
+			variant: "contained",
+			tooltipPlacement: "top",
+			tooltipTitle: "Testing button trigger",
+		},
 	}
 
 	useEffect(() => {

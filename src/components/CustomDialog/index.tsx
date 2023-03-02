@@ -15,56 +15,68 @@ import useCustomDialog from "./useCustomDialog"
 
 import { CustomDialogProps } from "./types"
 
-const CustomDialog: FC<CustomDialogProps> = ({ children, title, className, trigger, openOnMount }) => {
-    const { open, handleOpen, handleClose } = useCustomDialog()
+const CustomDialog: FC<CustomDialogProps> = ({
+	children,
+	title,
+	className,
+	trigger,
+	openOnMount,
+}) => {
+	const { open, handleOpen, handleClose } = useCustomDialog()
 
-    useEffect(() => {
-        if (openOnMount) {
-            handleOpen()
-        }
-    }, [])
+	useEffect(() => {
+		if (openOnMount) {
+			handleOpen()
+		}
+	}, [])
 
-    const renderDialogTrigger = () => {
-        if (!trigger) return null
+	const renderDialogTrigger = () => {
+		if (!trigger) return null
 
-        const { color, size, variant, tooltipTitle, tooltipPlacement } = trigger
+		const { color, size, variant, tooltipTitle, tooltipPlacement } = trigger
 
-        if (trigger.type === "Button") {
-            return (
-                <Button variant={variant} size={size} color={color} onClick={handleOpen}>
-                    {tooltipTitle}
-                </Button>
-            )
-        }
+		if (trigger.type === "Button") {
+			return (
+				<Button variant={variant} size={size} color={color} onClick={handleOpen}>
+					{tooltipTitle}
+				</Button>
+			)
+		}
 
-        return (
-            <Tooltip title={tooltipTitle} placement={tooltipPlacement}>
-                <Fab size={size} color={color} aria-label="help" onClick={handleOpen} data-testid="trigger-fab-icon">
-                    <LiveHelpIcon />
-                </Fab>
-            </Tooltip>
-        )
-    }
+		return (
+			<Tooltip title={tooltipTitle} placement={tooltipPlacement}>
+				<Fab
+					size={size}
+					color={color}
+					aria-label="help"
+					onClick={handleOpen}
+					data-testid="trigger-fab-icon"
+				>
+					<LiveHelpIcon />
+				</Fab>
+			</Tooltip>
+		)
+	}
 
-    return (
-        <div>
-            {renderDialogTrigger()}
-            <Dialog
-                open={open}
-                keepMounted
-                className={className}
-                onClose={handleClose}
-                TransitionComponent={DialogTransition}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle>{title}</DialogTitle>
-                <DialogContent>{children}</DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    )
+	return (
+		<div>
+			{renderDialogTrigger()}
+			<Dialog
+				open={open}
+				keepMounted
+				className={className}
+				onClose={handleClose}
+				TransitionComponent={DialogTransition}
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogTitle>{title}</DialogTitle>
+				<DialogContent>{children}</DialogContent>
+				<DialogActions>
+					<Button onClick={handleClose}>Close</Button>
+				</DialogActions>
+			</Dialog>
+		</div>
+	)
 }
 
 export default CustomDialog
