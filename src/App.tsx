@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react"
-// import reactLogo from './assets/react.svg'
 
-import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
+import useFfmpeg from "./ffmpeg/useFfmpeg"
 
 function App() {
-	const [ready, setReady] = useState(false)
-
-	const load = async () => {
-		const ffmpeg = createFFmpeg({ log: true })
-
-		await ffmpeg.load()
-
-		setReady(true)
-	}
+	const { ffmpeg, ready, load } = useFfmpeg()
 
 	useEffect(() => {
 		if (process.env.NODE_ENV !== "test") {
