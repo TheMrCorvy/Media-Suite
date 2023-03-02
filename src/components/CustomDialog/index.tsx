@@ -15,13 +15,19 @@ import useCustomDialog from "./useCustomDialog"
 
 import { CustomDialogProps } from "./types"
 
-const CustomDialog: FC<CustomDialogProps> = ({
-	children,
-	title,
-	className,
-	trigger,
-	openOnMount,
-}) => {
+const CustomDialog: FC<CustomDialogProps> = (props) => {
+	const {
+		children,
+		title,
+		className,
+		trigger,
+		openOnMount,
+		fullWidth,
+		maxWidth,
+		sx,
+		hideCloseBtn,
+	} = props
+
 	const { open, handleOpen, handleClose } = useCustomDialog()
 
 	useEffect(() => {
@@ -64,16 +70,21 @@ const CustomDialog: FC<CustomDialogProps> = ({
 			<Dialog
 				open={open}
 				keepMounted
+				fullWidth={fullWidth}
+				maxWidth={maxWidth}
 				className={className}
 				onClose={handleClose}
 				TransitionComponent={DialogTransition}
 				aria-describedby="alert-dialog-slide-description"
+				sx={sx}
 			>
 				<DialogTitle>{title}</DialogTitle>
 				<DialogContent>{children}</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose}>Close</Button>
-				</DialogActions>
+				{!hideCloseBtn && (
+					<DialogActions>
+						<Button onClick={handleClose}>Close</Button>
+					</DialogActions>
+				)}
 			</Dialog>
 		</div>
 	)

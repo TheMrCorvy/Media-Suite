@@ -1,11 +1,18 @@
 import { ReactElement } from "react"
 
-export interface CustomDialogProps {
+export interface CustomDialogProps extends BuildCustomDialogProps {
 	children: ReactElement
+}
+
+interface BuildCustomDialogProps {
 	title: string
 	className?: any
+	sx?: any
 	trigger?: TriggerDialog
 	openOnMount?: boolean
+	fullWidth?: boolean
+	maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl"
+	hideCloseBtn?: boolean
 }
 
 export interface TriggerDialog {

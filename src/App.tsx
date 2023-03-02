@@ -5,7 +5,6 @@ import Loader from "./components/Loader"
 
 import useFfmpeg from "./ffmpeg/useFfmpeg"
 
-
 function App() {
 	const { ready, load } = useFfmpeg()
 
@@ -19,7 +18,7 @@ function App() {
 		<>
 			<h1>Hello World!</h1>
 			{ready ? "ready" : "loading..."}
-			<CustomDialog title="test" openOnMount maxWidth='sm' fullWidth hideCloseBtn>
+			<CustomDialog title="test" openOnMount maxWidth="sm" fullWidth hideCloseBtn>
 				<Loader status={ready ? 100 : undefined} />
 			</CustomDialog>
 		</>
