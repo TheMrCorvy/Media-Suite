@@ -1,7 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const useCustomDialog = () => {
-	const [open, setOpen] = useState(false)
+const useCustomDialog = (openFromProps?: boolean) => {
+	const [open, setOpen] = useState(openFromProps ? openFromProps : false)
+
+	useEffect(() => {
+		if (openFromProps !== undefined) {
+			setOpen(openFromProps)
+		}
+	}, [openFromProps])
 
 	const handleOpen = () => {
 		setOpen(true)

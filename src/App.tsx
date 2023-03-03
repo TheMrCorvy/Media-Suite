@@ -8,8 +8,10 @@ import useFfmpeg from "./ffmpeg/useFfmpeg"
 function App() {
 	const { ready, load } = useFfmpeg()
 
+	const testEnv = process.env.NODE_ENV === "test"
+
 	useEffect(() => {
-		if (process.env.NODE_ENV !== "test") {
+		if (!testEnv) {
 			load()
 		}
 	}, [])
@@ -19,8 +21,8 @@ function App() {
 			<h1>Hello World!</h1>
 			{ready ? "ready" : "loading..."}
 			<CustomDialog
-				title="test"
-				openOnMount={process.env.NODE_ENV !== "test"}
+				title={ready ? 'Please select a video file to continue' : 'Wait while the app is loaidng...'}
+				openFromProps={!testEnv}
 				maxWidth="sm"
 				fullWidth
 				hideCloseBtn

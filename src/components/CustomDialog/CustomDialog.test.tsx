@@ -122,7 +122,7 @@ describe("The dialog opens and closes properly", () => {
 	it("Opens on mount", () => {
 		const props: CustomProps = {
 			title: "Testing dialog button trigger",
-			openOnMount: true,
+			openFromProps: true,
 		}
 
 		act(() => {

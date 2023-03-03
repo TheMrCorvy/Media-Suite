@@ -9,7 +9,7 @@ interface BuildCustomDialogProps {
 	className?: any
 	sx?: any
 	trigger?: TriggerDialog
-	openOnMount?: boolean
+	openFromProps?: boolean
 	fullWidth?: boolean
 	maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl"
 	hideCloseBtn?: boolean
