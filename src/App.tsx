@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState, ChangeEvent } from "react"
 
 import Button from "@mui/material/Button"
 
@@ -8,6 +8,8 @@ import Loader from "./components/Loader"
 import useFfmpeg from "./ffmpeg/useFfmpeg"
 
 function App() {
+	const [video, setVideo] = useState<File>()
+	const [openDialog, setOpenDialog] = useState(false)
 	const { ready, load } = useFfmpeg()
 
 	const testEnv = process.env.NODE_ENV === "test"
@@ -16,7 +18,16 @@ function App() {
 		if (!testEnv) {
 			load()
 		}
+
+		setOpenDialog(!testEnv)
 	}, [])
+
+	const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
+		const { files } = event.target
+		const selectedFiles = files as FileList
+		setVideo(selectedFiles?.[0])
+		setOpenDialog(false)
+	}
 
 	return (
 		<>
@@ -28,7 +39,7 @@ function App() {
 						? "Please select a video file to continue"
 						: "Wait while the app is loaidng..."
 				}
-				openFromProps={!testEnv}
+				openFromProps={openDialog}
 				maxWidth="sm"
 				fullWidth
 				hideCloseBtn
@@ -39,7 +50,7 @@ function App() {
 				) : (
 					<Button variant="contained" color="primary" component="label">
 						Select file
-						<input hidden accept="video/*" type="file" />
+						<input hidden accept="video/*" type="file" onChange={selectFile} />
 					</Button>
 				)}
 			</CustomDialog>
