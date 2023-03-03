@@ -179,4 +179,28 @@ describe("The dialog opens and closes properly", () => {
 
 		expect(dialogTitle).not.toBeVisible()
 	})
+
+	it("Shouldn't close if it is freezed", async () => {
+		const props: CustomProps = {
+			title: "Testing dialog button trigger",
+			openFromProps: true,
+		}
+
+		act(() => {
+			render(
+				<CustomDialog {...props}>
+					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+				</CustomDialog>
+			)
+		})
+
+		const closeBtn = screen.getByText("Close")
+		const dialogTitle = screen.getByText(props.title)
+
+		expect(dialogTitle).toBeVisible()
+
+		await act(async () => await user.click(closeBtn))
+
+		expect(dialogTitle).toBeVisible()
+	})
 })

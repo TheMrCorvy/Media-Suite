@@ -26,9 +26,10 @@ const CustomDialog: FC<CustomDialogProps> = (props) => {
 		maxWidth,
 		sx,
 		hideCloseBtn,
+		freeze,
 	} = props
 
-	const { open, handleOpen, handleClose } = useCustomDialog(openFromProps)
+	const { open, handleOpen, handleClose } = useCustomDialog({ openFromProps, freeze })
 
 	const renderDialogTrigger = () => {
 		if (!trigger) return null
@@ -66,7 +67,6 @@ const CustomDialog: FC<CustomDialogProps> = (props) => {
 				keepMounted
 				fullWidth={fullWidth}
 				maxWidth={maxWidth}
-
 				onClose={handleClose}
 				TransitionComponent={DialogTransition}
 				aria-describedby="alert-dialog-slide-description"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useCustomDialog = (openFromProps?: boolean) => {
+const useCustomDialog = ({ openFromProps, freeze }: Props) => {
 	const [open, setOpen] = useState(openFromProps ? openFromProps : false)
 
 	useEffect(() => {
@@ -10,14 +10,19 @@ const useCustomDialog = (openFromProps?: boolean) => {
 	}, [openFromProps])
 
 	const handleOpen = () => {
-		setOpen(true)
+		setOpen(!freeze ? true : false)
 	}
 
 	const handleClose = () => {
-		setOpen(false)
+		setOpen(!freeze ? false : true)
 	}
 
 	return { open, handleOpen, handleClose }
+}
+
+interface Props {
+	openFromProps?: boolean
+	freeze?: boolean
 }
 
 export default useCustomDialog

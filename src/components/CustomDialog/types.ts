@@ -13,6 +13,7 @@ interface BuildCustomDialogProps {
 	fullWidth?: boolean
 	maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl"
 	hideCloseBtn?: boolean
+	freeze?: boolean
 }
 
 export interface TriggerDialog {
