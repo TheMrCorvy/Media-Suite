@@ -90,10 +90,18 @@ const VideoSuite: FC = () => {
 				>
 					<Grid container rowSpacing={2} columnSpacing={2}>
 						<Grid item xs={12}>
-							<ScrollableTabs tabs={['tab 1', 'tab 2', 'tab 3']}>
-								<Typography variant="body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. </Typography>
-								<Typography variant="body1">Aspernatur ipsum quae officiis. </Typography>
-								<Typography variant="body1">Tempore ab, velit qui illo dignissimos enim laudantium. Reprehenderit cum ad consequatur nulla quia, distinctio numquam praesentium reiciendis!</Typography>
+							<ScrollableTabs tabs={["tab 1", "tab 2", "tab 3"]}>
+								<Typography variant="body1">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
+								</Typography>
+								<Typography variant="body1">
+									Aspernatur ipsum quae officiis.{" "}
+								</Typography>
+								<Typography variant="body1">
+									Tempore ab, velit qui illo dignissimos enim laudantium.
+									Reprehenderit cum ad consequatur nulla quia, distinctio numquam
+									praesentium reiciendis!
+								</Typography>
 							</ScrollableTabs>
 						</Grid>
 					</Grid>
