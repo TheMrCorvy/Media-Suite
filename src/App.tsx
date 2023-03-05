@@ -1,6 +1,8 @@
-import { useEffect, useState, ChangeEvent } from "react"
+import { useEffect, useState } from "react"
 
-
+import CssBaseline from '@mui/material/CssBaseline';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import theme from './theme'
 
 import CustomDialog from "./components/CustomDialog"
 import Loader from "./components/Loader"
@@ -10,7 +12,6 @@ import useFfmpeg from "./ffmpeg/useFfmpeg"
 import VideoSuite from "./pages/VideoSuite"
 
 function App() {
-
 	const [openDialog, setOpenDialog] = useState(false)
 	const { ready, load } = useFfmpeg()
 
@@ -24,12 +25,10 @@ function App() {
 		setOpenDialog(!testEnv)
 	}, [])
 
-
-
 	return (
-		<>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<VideoSuite />
-			{ready ? "ready" : "loading..."}
 			<CustomDialog
 				title={
 					ready
@@ -48,7 +47,7 @@ function App() {
 					<SelectFile fileType="video" callback={() => setOpenDialog(false)} />
 				)}
 			</CustomDialog>
-		</>
+		</ThemeProvider>
 	)
 }
 
