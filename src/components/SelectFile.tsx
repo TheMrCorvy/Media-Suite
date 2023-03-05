@@ -2,7 +2,7 @@ import { FC, useState, useEffect, ChangeEvent } from "react"
 
 import Button from "@mui/material/Button"
 
-const SelectFile: FC<Props> = ({ callback, fileType, multiple, button }) => {
+const SelectFile: FC<Props> = ({ callback, fileType, multiple, buttonProps }) => {
 	const [file, setFile] = useState<File>()
 
 	const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +14,7 @@ const SelectFile: FC<Props> = ({ callback, fileType, multiple, button }) => {
 	useEffect(() => file && callback(file), [file])
 
 	return (
-		<Button {...button} component="label">
+		<Button {...buttonProps} component="label">
 			Select File
 			<input
 				hidden
@@ -31,7 +31,7 @@ interface Props {
 	callback: (file: File) => void
 	fileType: "video" | "image" | "audio"
 	multiple?: boolean
-	button?: {
+	buttonProps?: {
 		variant: "contained" | "outlined" | "text"
 		color: "primary" | "error" | "info" | "inherit" | "secondary" | "success" | "warning"
 		size: "large" | "medium" | "small"
