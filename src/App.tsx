@@ -6,6 +6,7 @@ import CustomDialog from "./components/CustomDialog"
 import Loader from "./components/Loader"
 
 import useFfmpeg from "./ffmpeg/useFfmpeg"
+import VideoSuite from "./pages/VideoSuite"
 
 function App() {
 	const [video, setVideo] = useState<File>()
@@ -31,7 +32,7 @@ function App() {
 
 	return (
 		<>
-			<h1>Hello World!</h1>
+			<VideoSuite />
 			{ready ? "ready" : "loading..."}
 			<CustomDialog
 				title={
