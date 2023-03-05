@@ -6,11 +6,13 @@ import CardMedia from "@mui/material/CardMedia"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Fab from "@mui/material/Fab"
+import Typography from "@mui/material/Typography"
 import PlayCircleIcon from "@mui/icons-material/PlayCircle"
 
 import CustomDialog from "../components/CustomDialog"
 import Loader from "../components/Loader"
 import SelectFile from "../components/SelectFile"
+import ScrollableTabs from "../components/ScrollableTabs"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 
@@ -87,14 +89,12 @@ const VideoSuite: FC = () => {
 					sx={{ minHeight: "50vh", background: "green", padding: "1.5rem" }}
 				>
 					<Grid container rowSpacing={2} columnSpacing={2}>
-						<Grid item xs={10} sm={6} md={4} xl={2}>
-							<Card sx={{ aspectRatio: "16 / 9" }}>
-								<CardMedia
-									sx={{ height: "100%", width: "100%" }}
-									image="./src/assets/lycoris_test.jpg"
-									title="green iguana"
-								/>
-							</Card>
+						<Grid item xs={12}>
+							<ScrollableTabs tabs={['tab 1', 'tab 2', 'tab 3']}>
+								<Typography variant="body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. </Typography>
+								<Typography variant="body1">Aspernatur ipsum quae officiis. </Typography>
+								<Typography variant="body1">Tempore ab, velit qui illo dignissimos enim laudantium. Reprehenderit cum ad consequatur nulla quia, distinctio numquam praesentium reiciendis!</Typography>
+							</ScrollableTabs>
 						</Grid>
 					</Grid>
 				</Grid>
