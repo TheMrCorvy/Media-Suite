@@ -1,15 +1,16 @@
 import { useEffect, useState, ChangeEvent } from "react"
 
-import Button from "@mui/material/Button"
+
 
 import CustomDialog from "./components/CustomDialog"
 import Loader from "./components/Loader"
+import SelectFile from "./components/SelectFile"
 
 import useFfmpeg from "./ffmpeg/useFfmpeg"
 import VideoSuite from "./pages/VideoSuite"
 
 function App() {
-	const [video, setVideo] = useState<File>()
+
 	const [openDialog, setOpenDialog] = useState(false)
 	const { ready, load } = useFfmpeg()
 
@@ -23,12 +24,7 @@ function App() {
 		setOpenDialog(!testEnv)
 	}, [])
 
-	const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
-		const { files } = event.target
-		const selectedFiles = files as FileList
-		setVideo(selectedFiles?.[0])
-		setOpenDialog(false)
-	}
+
 
 	return (
 		<>
@@ -49,10 +45,7 @@ function App() {
 				{!ready ? (
 					<Loader status={ready ? 100 : undefined} />
 				) : (
-					<Button variant="contained" color="primary" component="label">
-						Select file
-						<input hidden accept="video/*" type="file" onChange={selectFile} />
-					</Button>
+					<SelectFile fileType="video" callback={() => setOpenDialog(false)} />
 				)}
 			</CustomDialog>
 		</>
