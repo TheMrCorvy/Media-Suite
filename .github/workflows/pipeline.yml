@@ -53,6 +53,10 @@ jobs:
               uses: ad-m/github-push-action@master
               with:
                   github_token: ${{ secrets.PA_TOKEN }}
+                  branch: development
+            - uses: fastify/github-action-merge-dependabot@v2.1.1
+              with:
+                  github-token: ${{ secrets.PA_TOKEN }
 
     test:
         needs: [lint]
