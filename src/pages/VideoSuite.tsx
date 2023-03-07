@@ -123,7 +123,11 @@ const VideoSuite: FC = () => {
 				{!ready ? (
 					<Loader status={ready ? 100 : undefined} />
 				) : (
-					<SelectFile fileType="video" callback={() => handleClose()} />
+					<SelectFile
+						fileType="video"
+						includeExtensions={["mkv"]}
+						callback={() => handleClose()}
+					/>
 				)}
 			</CustomDialog>
 		</>
