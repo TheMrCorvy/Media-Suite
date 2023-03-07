@@ -13,6 +13,7 @@ import CustomDialog from "../components/CustomDialog"
 import Loader from "../components/Loader"
 import SelectFile from "../components/SelectFile"
 import ScrollableTabs from "../components/ScrollableTabs"
+import VideoCodec from "../components/VideoCodec"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
@@ -20,7 +21,7 @@ import useCustomDialog from "../hooks/useCustomDialog"
 const VideoSuite: FC = () => {
 	const { ready, load } = useFfmpeg()
 
-	const { handleClose, open } = useCustomDialog({ openFromProps: true })
+	const { handleClose, open } = useCustomDialog({ openFromProps: false })
 
 	const testEnv = process.env.NODE_ENV === "test"
 
@@ -90,17 +91,31 @@ const VideoSuite: FC = () => {
 				>
 					<Grid container rowSpacing={2} columnSpacing={2}>
 						<Grid item xs={12}>
-							<ScrollableTabs tabs={["tab 1", "tab 2", "tab 3"]}>
+							<ScrollableTabs
+								tabs={[
+									"video codec",
+									"video filters",
+									"subtitles",
+									"audio codec",
+									"audio filters",
+									"advenced",
+								]}
+							>
+								<VideoCodec />
 								<Typography variant="body1">
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
 								</Typography>
 								<Typography variant="body1">
-									Aspernatur ipsum quae officiis.{" "}
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
 								</Typography>
 								<Typography variant="body1">
-									Tempore ab, velit qui illo dignissimos enim laudantium.
-									Reprehenderit cum ad consequatur nulla quia, distinctio numquam
-									praesentium reiciendis!
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
+								</Typography>
+								<Typography variant="body1">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
+								</Typography>
+								<Typography variant="body1">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
 								</Typography>
 							</ScrollableTabs>
 						</Grid>
