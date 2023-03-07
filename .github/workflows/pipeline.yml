@@ -30,6 +30,13 @@ jobs:
               run: npm install
             - name: Lint
               run: npm run lint
+    format:
+        runs-on: ubuntu-18.04
+        steps:
+            - name: Auto-Formatter
+              uses: mezgoodle/auto-formatter@v1.0.2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
     test:
         needs: [lint]
