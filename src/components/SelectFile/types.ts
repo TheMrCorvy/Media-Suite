@@ -8,7 +8,7 @@ export interface SelectFileProps extends useSelectFileProps {
 }
 
 export interface useSelectFileProps {
-	callback: (file: File) => void
+	callback: (file: FileList) => void
 	fileType: "video" | "image" | "audio" | "*"
 	includeExtensions?: string[]
 }

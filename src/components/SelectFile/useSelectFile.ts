@@ -3,12 +3,12 @@ import { useState, useEffect, ChangeEvent } from "react"
 import { useSelectFileProps } from "./types"
 
 const useSelectFiles = ({ includeExtensions, fileType, callback }: useSelectFileProps) => {
-	const [file, setFile] = useState<File>()
+	const [fileList, setFileList] = useState<FileList>()
 
 	const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target
 		const selectedFiles = files as FileList
-		setFile(selectedFiles[0])
+		setFileList(selectedFiles)
 	}
 
 	const addExtensions = () => {
@@ -23,7 +23,7 @@ const useSelectFiles = ({ includeExtensions, fileType, callback }: useSelectFile
 		return str
 	}
 
-	useEffect(() => file && callback(file), [file])
+	useEffect(() => fileList && callback(fileList), [fileList])
 
 	const accept = () => {
 		if (fileType !== "*") {
