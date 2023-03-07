@@ -6,7 +6,7 @@ import { SelectFileProps } from "./types"
 
 describe("The component should render as intended", () => {
 	it("Renders", () => {
-		render(<SelectFile callback={() => { }} fileType="video" />)
+		render(<SelectFile callback={() => {}} fileType="video" />)
 
 		const inputBtn = screen.getByText("Select File")
 		expect(inputBtn).toBeInTheDocument()
@@ -14,9 +14,8 @@ describe("The component should render as intended", () => {
 
 	it("Reanders with all the custom properties", () => {
 		const props: SelectFileProps = {
-			callback: () => { },
+			callback: () => {},
 			fileType: "video",
-
 
 			includeExtensions: ["mkv", "test"],
 			multiple: true,
