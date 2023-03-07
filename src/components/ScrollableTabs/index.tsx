@@ -11,9 +11,19 @@ const ScrollableTabs: FC<Props> = ({ children, tabs }) => {
 	}
 
 	const renderTabBtn = () => {
-		return tabs.map((tab, index) => (
-			<Tab label={tab} key={index + tab} is-selected={index === value ? "true" : "false"} />
-		))
+		return tabs.map((tab, index) => {
+			if (index + 1 <= children.length) {
+				return (
+					<Tab
+						label={tab}
+						key={index + tab}
+						is-selected={index === value ? "true" : "false"}
+					/>
+				)
+			}
+
+			return null
+		})
 	}
 
 	const renderTabPanels = () => {

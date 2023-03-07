@@ -23,7 +23,7 @@ describe("The component should render propperly under different conditions", () 
 		expect(text).toBeInTheDocument()
 	})
 
-	it("Should render the exact amount of tabs", () => {
+	it("Shouldn't render more tabs than the amount of child elements", () => {
 		render(
 			<ScrollableTabs tabs={tabs}>
 				<p>lorem</p>
@@ -33,10 +33,10 @@ describe("The component should render propperly under different conditions", () 
 
 		const tab1 = screen.getByText("tab 1")
 		const tab2 = screen.getByText("tab 2")
-		const tab3 = screen.getByText("tab 3")
+		const tab3 = screen.queryByText("tab 3")
 		expect(tab1).toBeInTheDocument()
 		expect(tab2).toBeInTheDocument()
-		expect(tab3).toBeInTheDocument()
+		expect(tab3).not.toBeInTheDocument()
 
 		const text = screen.getByText("lorem")
 		expect(text).toBeInTheDocument()
