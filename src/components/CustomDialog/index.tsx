@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 
 import Button from "@mui/material/Button"
 import Dialog from "@mui/material/Dialog"
