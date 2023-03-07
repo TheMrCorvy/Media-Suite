@@ -33,10 +33,15 @@ jobs:
     format:
         runs-on: ubuntu-18.04
         steps:
-            - name: Auto-Formatter
-              uses: mezgoodle/auto-formatter@v1.0.2
-              env:
-                  GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+            - name: Commit files
+              run: |
+                  git config --local user.email "mr.corvy@gmail.com"
+                  git config --local user.name "github-actions[bot]"
+                  git commit -a -m "Auto formatted the code"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+                  github_token: ${{ secrets.PA_TOKEN }}
 
     test:
         needs: [lint]
