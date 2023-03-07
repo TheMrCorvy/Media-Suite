@@ -33,6 +33,17 @@ jobs:
     format:
         runs-on: ubuntu-18.04
         steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v2
+              with:
+                  cache: "npm"
+                  node-version: "16"
+            - name: Install dependencies
+              run: npm install
+            - name: Format
+              run: npm run format
             - name: Commit files
               run: |
                   git config --local user.email "mr.corvy@gmail.com"
