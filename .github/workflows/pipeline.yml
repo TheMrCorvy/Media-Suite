@@ -56,7 +56,7 @@ jobs:
                   branch: development
             - uses: fastify/github-action-merge-dependabot@v2.1.1
               with:
-                  github-token: ${{ secrets.PA_TOKEN }
+                  github-token: ${{ secrets.PA_TOKEN }}
 
     test:
         needs: [lint]
