@@ -15,6 +15,7 @@ import SelectFile from "../components/SelectFile"
 import ScrollableTabs from "../components/ScrollableTabs"
 import VideoCodec from "../components/VideoCodec"
 import VideoFilters from "../components/VideoFilters"
+import Subtitles from "../components/Subtitles"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
@@ -104,9 +105,7 @@ const VideoSuite: FC = () => {
 							>
 								<VideoCodec />
 								<VideoFilters />
-								<Typography variant="body1">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
-								</Typography>
+								<Subtitles />
 								<Typography variant="body1">
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
 								</Typography>
