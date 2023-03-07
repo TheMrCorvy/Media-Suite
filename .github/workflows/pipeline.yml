@@ -30,33 +30,6 @@ jobs:
               run: npm install
             - name: Lint
               run: npm run lint
-    format:
-        runs-on: ubuntu-18.04
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  fetch-depth: 0
-            - uses: actions/setup-node@v2
-              with:
-                  cache: "npm"
-                  node-version: "16"
-            - name: Install dependencies
-              run: npm install
-            - name: Format
-              run: npm run format
-            - name: Commit files
-              run: |
-                  git config --local user.email "mr.corvy@gmail.com"
-                  git config --local user.name "github-actions[bot]"
-                  git commit -a -m "Auto formatted the code"
-            - name: Push changes
-              uses: ad-m/github-push-action@master
-              with:
-                  github_token: ${{ secrets.PA_TOKEN }}
-                  branch: development
-            - uses: fastify/github-action-merge-dependabot@v2.1.1
-              with:
-                  github-token: ${{ secrets.PA_TOKEN }}
 
     test:
         needs: [lint]
