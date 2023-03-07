@@ -11,7 +11,7 @@ import Fab from "@mui/material/Fab"
 import LiveHelpIcon from "@mui/icons-material/LiveHelp"
 
 import DialogTransition from "./DialogTransition"
-import useCustomDialog from "./useCustomDialog"
+import useCustomDialog from "../../hooks/useCustomDialog"
 
 import { CustomDialogProps } from "./types"
 

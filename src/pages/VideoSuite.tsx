@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react"
+import { FC, useEffect } from "react"
 
 import Grid from "@mui/material/Grid"
 import Card from "@mui/material/Card"
@@ -15,10 +15,12 @@ import SelectFile from "../components/SelectFile"
 import ScrollableTabs from "../components/ScrollableTabs"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
+import useCustomDialog from "../hooks/useCustomDialog"
 
 const VideoSuite: FC = () => {
-	const [openDialog, setOpenDialog] = useState(false)
 	const { ready, load } = useFfmpeg()
+
+	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
 	const testEnv = process.env.NODE_ENV === "test"
 
@@ -26,8 +28,6 @@ const VideoSuite: FC = () => {
 		if (!testEnv) {
 			load()
 		}
-
-		// setOpenDialog(!testEnv)
 	}, [])
 
 	return (
@@ -52,13 +52,13 @@ const VideoSuite: FC = () => {
 						</Grid>
 						<Grid item xs>
 							<Grid container>
-								<Grid xs={12}>
+								<Grid item xs={12}>
 									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
 									tempora ex neque eum assumenda accusamus eos et! Nostrum impedit
 									velit expedita, iusto beatae excepturi ab. Reprehenderit,
 									perspiciatis dicta. A, voluptate!
 								</Grid>
-								<Grid xs={12}>
+								<Grid item xs={12}>
 									<Grid container>
 										<Grid item xs={8}>
 											<Button variant="contained">Load Preset</Button>
@@ -114,7 +114,7 @@ const VideoSuite: FC = () => {
 						? "Please select a video file to continue"
 						: "Wait while the app is loaidng..."
 				}
-				openFromProps={openDialog}
+				openFromProps={open}
 				maxWidth="sm"
 				fullWidth
 				hideCloseBtn
@@ -123,7 +123,7 @@ const VideoSuite: FC = () => {
 				{!ready ? (
 					<Loader status={ready ? 100 : undefined} />
 				) : (
-					<SelectFile fileType="video" callback={() => setOpenDialog(false)} />
+					<SelectFile fileType="video" callback={() => handleClose()} />
 				)}
 			</CustomDialog>
 		</>
