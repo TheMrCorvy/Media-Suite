@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 
 import Grid from "@mui/material/Grid"
 import Card from "@mui/material/Card"
@@ -22,18 +22,32 @@ import AdvancedOptions from "../components/AdvancedOptions"
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
 
+import { FFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
+
 const VideoSuite: FC = () => {
-	const { ready, load } = useFfmpeg()
+	const { load } = useFfmpeg()
+	const [ffmpeg, setFFmpeg] = useState<FFmpeg>()
 
 	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
-	const testEnv = process.env.NODE_ENV === "test"
-
 	useEffect(() => {
-		if (!testEnv) {
-			load()
-		}
+		load().then((result) => setFFmpeg(result))
 	}, [])
+
+	const readFileProps = (file: FileList) => {
+		if (ffmpeg) {
+			handleClose()
+
+			fetchFile(file[0]).then((testFile) => {
+				ffmpeg.FS("writeFile", "test.mkv", testFile)
+
+				ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt").then(() => {
+					const data = ffmpeg.FS("readFile", "metadata.txt")
+					console.log(new TextDecoder().decode(data))
+				})
+			})
+		}
+	}
 
 	return (
 		<>
@@ -119,7 +133,7 @@ const VideoSuite: FC = () => {
 
 			<CustomDialog
 				title={
-					ready
+					ffmpeg
 						? "Please select a video file to continue"
 						: "Wait while the app is loaidng..."
 				}
@@ -129,13 +143,13 @@ const VideoSuite: FC = () => {
 				hideCloseBtn
 				freeze
 			>
-				{!ready ? (
-					<Loader status={ready ? 100 : undefined} />
+				{!ffmpeg ? (
+					<Loader status={ffmpeg ? 100 : undefined} />
 				) : (
 					<SelectFile
 						fileType="video"
 						includeExtensions={["mkv"]}
-						callback={() => handleClose()}
+						callback={readFileProps}
 					/>
 				)}
 			</CustomDialog>
