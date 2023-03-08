@@ -27,6 +27,8 @@ import { FFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
 const VideoSuite: FC = () => {
 	const { load } = useFfmpeg()
 	const [ffmpeg, setFFmpeg] = useState<FFmpeg>()
+	// const [logs, setLogs] = useState<any[]>([])
+	const logs: any[] = []
 
 	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
@@ -36,6 +38,11 @@ const VideoSuite: FC = () => {
 
 	const readFileProps = (file: FileList) => {
 		if (ffmpeg) {
+			// ffmpeg.setLogging(true);
+			ffmpeg.setLogger((log) => {
+				logs.push(log)
+			})
+
 			handleClose()
 
 			fetchFile(file[0]).then((testFile) => {
@@ -43,8 +50,16 @@ const VideoSuite: FC = () => {
 
 				ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt").then(() => {
 					const data = ffmpeg.FS("readFile", "metadata.txt")
-					console.log(new TextDecoder().decode(data))
+					// console.log(logs)
 				})
+
+				// console.log(logs)
+			})
+
+			ffmpeg.setProgress(({ ratio }) => {
+				if (ratio === 1) {
+					console.log(logs)
+				}
 			})
 		}
 	}
