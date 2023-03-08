@@ -6,7 +6,6 @@ import CardMedia from "@mui/material/CardMedia"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Fab from "@mui/material/Fab"
-import Typography from "@mui/material/Typography"
 import PlayCircleIcon from "@mui/icons-material/PlayCircle"
 
 import CustomDialog from "../components/CustomDialog"
@@ -18,6 +17,7 @@ import VideoFilters from "../components/VideoFilters"
 import Subtitles from "../components/Subtitles"
 import AudioCodec from "../components/AudioCodec"
 import AudioFilters from "../components/AudioFilters"
+import AdvancedOptions from "../components/AdvancedOptions"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
@@ -110,9 +110,7 @@ const VideoSuite: FC = () => {
 								<Subtitles />
 								<AudioCodec />
 								<AudioFilters />
-								<Typography variant="body1">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
-								</Typography>
+								<AdvancedOptions />
 							</ScrollableTabs>
 						</Grid>
 					</Grid>
