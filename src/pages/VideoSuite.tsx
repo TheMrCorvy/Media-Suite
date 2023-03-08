@@ -25,7 +25,7 @@ import useCustomDialog from "../hooks/useCustomDialog"
 const VideoSuite: FC = () => {
 	const { ready, load } = useFfmpeg()
 
-	const { handleClose, open } = useCustomDialog({ openFromProps: false })
+	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
 	const testEnv = process.env.NODE_ENV === "test"
 
