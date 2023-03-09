@@ -93,7 +93,7 @@ const useExtractLogsData = () => {
 
 		stream = { ...stream, streamIndex: Number(streamPropsStr[0]) } // "0" => 0
 
-		const langIndex = log.indexOf("(") + 1 // ya que siempre tra el primero, lo que sigue de esto es el idioma
+		const langIndex = log.indexOf("(") + 1
 		const lang = log.slice(langIndex)
 		stream = { ...stream, lang: lang[0] + lang[1] + lang[2] } // "jpn"
 

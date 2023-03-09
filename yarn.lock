@@ -4545,11 +4545,6 @@ vite-node@0.29.2:
     picocolors "^1.0.0"
     vite "^3.0.0 || ^4.0.0"
 
-vite-plugin-cross-origin-isolation@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.npmjs.org/vite-plugin-cross-origin-isolation/-/vite-plugin-cross-origin-isolation-0.1.6.tgz"
-  integrity sha512-OY0naW9nPUDrKTffYnY7FRYXOgZdHoNwMGpPxUmj/n32mGZi01fcq+J536jkmwGWX7DLT95XBQVHHbrAJzTvrw==
-
 "vite@^3.0.0 || ^4.0.0", vite@^4, vite@^4.1.0:
   version "4.1.4"
   resolved "https://registry.npmjs.org/vite/-/vite-4.1.4.tgz"

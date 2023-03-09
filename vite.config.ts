@@ -3,11 +3,10 @@
 
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
-import crossOriginIsolation from "vite-plugin-cross-origin-isolation"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [crossOriginIsolation(), react()],
+	plugins: [react()],
 	esbuild: {
 		jsxInject: "import React from 'react'",
 	},
@@ -16,5 +15,12 @@ export default defineConfig({
 		environment: "jsdom",
 		setupFiles: "./src/setupTest.ts",
 		css: true,
+	},
+	server: {
+		headers: {
+			"Cross-Origin-Embedder-Policy": "require-corp",
+			"Cross-Origin-Opener-Policy": "same-origin",
+			"Cross-Origin-Resource-Policy": "same-origin",
+		},
 	},
 })
