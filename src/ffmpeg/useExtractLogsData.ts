@@ -1,17 +1,31 @@
+interface Stream {
+	type: string
+	info: string
+	lang: string
+	streamIndex: number
+	title?: string
+}
+
+interface FileInfo {
+	streams: Stream[]
+	fileFormat: string
+	fileQuality: string
+	basicInfo: string[]
+}
+
 const useExtractLogsData = (logs: string[]) => {
-	const fileInfo = {
-		streams: [{}],
+	let fileInfo: FileInfo = {
+		streams: [],
 		fileFormat: "",
 		fileQuality: "",
-		basicInfo: [""],
+		basicInfo: [],
 	}
 
-	const stream = {
+	let stream: Stream = {
 		type: "",
 		info: "",
 		lang: "",
-		title: "", //optional
-		streamIndex: 0, // optional
+		streamIndex: 0,
 	}
 
 	// search for the format and type of the file
@@ -79,7 +93,7 @@ const useExtractLogsData = (logs: string[]) => {
 
 		const streamInfoArr = log.split("): ")
 		// "Video: h264 (High), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 47.95 tbc (default)"
-		const type = streamInfoArr[1].split(":")
+		const type = streamInfoArr[1].split(": ")
 		// ["Video", " h264 (High), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 47.95 tbc (default)"]
 		stream.type = type[0]
 		// "Video"
@@ -88,6 +102,14 @@ const useExtractLogsData = (logs: string[]) => {
 
 		if (type[0] !== "Subtitle") {
 			fileInfo.streams.push({ ...stream, title: "" })
+
+			stream = {
+				type: "",
+				info: "",
+				lang: "",
+				streamIndex: 0,
+			}
+
 			continue
 		}
 
@@ -96,6 +118,13 @@ const useExtractLogsData = (logs: string[]) => {
 		stream.title = titleIndex[1]
 
 		fileInfo.streams.push(stream)
+
+		stream = {
+			type: "",
+			info: "",
+			lang: "",
+			streamIndex: 0,
+		}
 	}
 
 	return fileInfo
