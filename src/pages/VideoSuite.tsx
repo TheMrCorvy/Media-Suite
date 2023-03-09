@@ -21,12 +21,14 @@ import AdvancedOptions from "../components/AdvancedOptions"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
+import useExtractLogsData from "../ffmpeg/useExtractLogsData"
 
 import { FFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
 
 const VideoSuite: FC = () => {
 	const { load } = useFfmpeg()
 	const [ffmpeg, setFFmpeg] = useState<FFmpeg>()
+	const extractLogs = useExtractLogsData
 
 	const logs: string[] = []
 
@@ -52,7 +54,7 @@ const VideoSuite: FC = () => {
 
 			ffmpeg.setProgress(({ ratio }) => {
 				if (ratio === 1) {
-					console.log(logs)
+					console.log(extractLogs(logs))
 				}
 			})
 		}

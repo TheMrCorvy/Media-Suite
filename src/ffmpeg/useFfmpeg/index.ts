@@ -2,7 +2,7 @@ import { createFFmpeg } from "@ffmpeg/ffmpeg"
 
 const useFfmpeg = () => {
 	const ffmpeg = createFFmpeg({
-		log: false,
+		log: true,
 	})
 
 	const load = async () => {
@@ -18,3 +18,6 @@ export default useFfmpeg
 
 // important for later
 // https://github.com/ffmpegwasm/ffmpeg.wasm-core#configuration
+
+// add a function to "keep all attachments"
+// ffmpeg -i 1.mkv -map 0 -c copy -disposition:s:0 default 2.mkv
