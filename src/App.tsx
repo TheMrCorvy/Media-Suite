@@ -1,30 +1,15 @@
-import { useState, useEffect } from "react"
-// import reactLogo from './assets/react.svg'
+import CssBaseline from "@mui/material/CssBaseline"
+import ThemeProvider from "@mui/material/styles/ThemeProvider"
+import theme from "./theme"
 
-import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
+import VideoSuite from "./pages/VideoSuite"
 
 function App() {
-	const [ready, setReady] = useState(false)
-
-	const load = async () => {
-		const ffmpeg = createFFmpeg({ log: true })
-
-		await ffmpeg.load()
-
-		setReady(true)
-	}
-
-	useEffect(() => {
-		if (process.env.NODE_ENV !== "test") {
-			load()
-		}
-	}, [])
-
 	return (
-		<>
-			<h1>Hello World!</h1>
-			{ready ? "ready" : "loading..."}
-		</>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<VideoSuite />
+		</ThemeProvider>
 	)
 }
 

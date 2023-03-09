@@ -3,20 +3,25 @@
 
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
-import crossOriginIsolation from "vite-plugin-cross-origin-isolation"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [crossOriginIsolation(), react()],
+	plugins: [react()],
+	base: "/Media-Suite/",
 	esbuild: {
 		jsxInject: "import React from 'react'",
 	},
 	test: {
 		globals: true,
 		environment: "jsdom",
-		setupFiles: "./src/test/setup.ts",
-		// you might want to disable it, if you don't have tests that rely on CSS
-		// since parsing CSS is slow
+		setupFiles: "./src/setupTest.ts",
 		css: true,
+	},
+	server: {
+		headers: {
+			"Cross-Origin-Embedder-Policy": "require-corp",
+			"Cross-Origin-Opener-Policy": "same-origin",
+			"Cross-Origin-Resource-Policy": "same-origin",
+		},
 	},
 })
