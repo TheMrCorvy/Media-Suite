@@ -28,7 +28,7 @@ import { FFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
 const VideoSuite: FC = () => {
 	const { load } = useFfmpeg()
 	const [ffmpeg, setFFmpeg] = useState<FFmpeg>()
-	const extractLogs = useExtractLogsData
+	const { getFileData } = useExtractLogsData()
 
 	const logs: string[] = []
 
@@ -54,7 +54,7 @@ const VideoSuite: FC = () => {
 
 			ffmpeg.setProgress(({ ratio }) => {
 				if (ratio === 1) {
-					console.log(extractLogs(logs))
+					console.log(getFileData(logs))
 				}
 			})
 		}
