@@ -54,7 +54,8 @@ const VideoSuite: FC = () => {
 
 			ffmpeg.setProgress(({ ratio }) => {
 				if (ratio === 1) {
-					console.log(getFileData(logs))
+					const res = getFileData(logs)
+					console.log(res)
 				}
 			})
 		}

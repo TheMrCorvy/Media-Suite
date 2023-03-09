@@ -39,9 +39,6 @@ const useExtractLogsData = () => {
 
 	const loopFor: LoopFor = ({ startFrom, searchFor, execFunction }) => {
 		let currentIndex = startFrom
-		if (currentIndex > logs.length) {
-			throw new Error("The index is bigger than the length of the array")
-		}
 
 		for (let index = currentIndex; index < logs.length; index++) {
 			const log = logs[index]
