@@ -16,7 +16,6 @@ import VideoCodec from "../components/VideoCodec"
 import VideoFilters from "../components/VideoFilters"
 import Subtitles from "../components/Subtitles"
 import AudioCodec from "../components/AudioCodec"
-import AudioFilters from "../components/AudioFilters"
 import AdvancedOptions from "../components/AdvancedOptions"
 
 import useFfmpeg from "../ffmpeg/useFfmpeg"
@@ -127,7 +126,6 @@ const VideoSuite: FC = () => {
 									"video filters",
 									"subtitles",
 									"audio codec",
-									"audio filters",
 									"advenced",
 								]}
 							>
@@ -135,7 +133,6 @@ const VideoSuite: FC = () => {
 								<VideoFilters />
 								<Subtitles />
 								<AudioCodec />
-								<AudioFilters />
 								<AdvancedOptions />
 							</ScrollableTabs>
 						</Grid>
