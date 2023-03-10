@@ -32,7 +32,7 @@ const VideoSuite: FC = () => {
 
 	const logs: string[] = []
 
-	const { handleClose, open } = useCustomDialog({ openFromProps: true })
+	const { handleClose, open } = useCustomDialog({ openFromProps: false })
 
 	useEffect(() => {
 		load().then((result) => setFFmpeg(result))

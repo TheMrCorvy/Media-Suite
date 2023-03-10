@@ -1,41 +1,17 @@
-import { FC, useState, ChangeEvent } from "react"
+import { FC, useState } from "react"
 
 import Grid from "@mui/material/Grid"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
-import Slider from "@mui/material/Slider"
-import Typography from "@mui/material/Typography"
-import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
-
-function valuetext(value: number) {
-	return `${value}°C`
-}
+import CustomSlider from "../CustomSlider"
 
 const VideoCodec: FC = () => {
 	const [age, setAge] = useState("")
-
-	const [value, setValue] = useState<number>(30)
-
-	const handleSliderChange = (event: Event, newValue: number | number[]) => {
-		if (typeof newValue === "number") {
-			setValue(newValue)
-		}
-	}
-
-	const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const newValue = Number(event.target.value)
-
-		if (newValue <= 100 && newValue >= 0) {
-			setValue(newValue)
-		} else {
-			setValue(100)
-		}
-	}
 
 	const handleChange = (event: SelectChangeEvent) => {
 		setAge(event.target.value as string)
@@ -62,30 +38,15 @@ const VideoCodec: FC = () => {
 			</Grid>
 
 			<Grid item xs={12} sm={8} md={10}>
-				<Grid container>
-					<Grid item xs={9}>
-						<Typography variant="subtitle1">Quality of the video</Typography>
-					</Grid>
-					<Grid item xs={3}>
-						<TextField
-							id="outlined-controlled"
-							label="Controlled"
-							type="number"
-							value={value}
-							onChange={handleTextChange}
-						/>
-					</Grid>
-				</Grid>
-				<Slider
-					aria-label="Quality of the video"
-					getAriaValueText={valuetext}
-					valueLabelDisplay="auto"
+				<CustomSlider
+					showTextField
+					id='select-video-quality'
+					label="Select Video Quality"
+					min={0}
+					max={50}
+					initialValue={23}
 					step={1}
 					marks
-					min={0}
-					max={100}
-					value={value}
-					onChange={handleSliderChange}
 				/>
 			</Grid>
 
