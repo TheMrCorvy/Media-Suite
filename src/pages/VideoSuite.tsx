@@ -59,11 +59,11 @@ const VideoSuite: FC = () => {
 					if ("wakeLock" in navigator) {
 						console.log("Screen Wake Lock API supported!")
 
-						let wakeLock = null;
+						let wakeLock = null
 
 						// create an async function to request a wake lock
 						try {
-							wakeLock = await navigator.wakeLock.request("screen");
+							wakeLock = await navigator.wakeLock.request("screen")
 						} catch (err) {
 							// The Wake Lock request has failed - usually system related, such as battery.
 							console.log(err)
