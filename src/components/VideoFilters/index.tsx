@@ -8,7 +8,6 @@ import MenuItem from "@mui/material/MenuItem"
 import CustomSlider from "../CustomSlider"
 
 const VideoFilters: FC = () => {
-
 	const [age, setAge] = useState("")
 
 	const handleChange = (event: SelectChangeEvent) => {
