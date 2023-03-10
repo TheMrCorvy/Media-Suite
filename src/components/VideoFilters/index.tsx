@@ -1,9 +1,6 @@
-import { FC, useState, ChangeEvent } from "react"
+import { FC, useState } from "react"
 
 import Grid from "@mui/material/Grid"
-import Slider from "@mui/material/Slider"
-import Typography from "@mui/material/Typography"
-import TextField from "@mui/material/TextField"
 import FormControl from "@mui/material/FormControl"
 import InputLabel from "@mui/material/InputLabel"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
@@ -11,28 +8,11 @@ import MenuItem from "@mui/material/MenuItem"
 import CustomSlider from "../CustomSlider"
 
 const VideoFilters: FC = () => {
-	const [value, setValue] = useState<number>(1)
 
 	const [age, setAge] = useState("")
 
 	const handleChange = (event: SelectChangeEvent) => {
 		setAge(event.target.value as string)
-	}
-
-	const handleSliderChange = (event: Event, newValue: number | number[]) => {
-		if (typeof newValue === "number") {
-			setValue(newValue)
-		}
-	}
-
-	const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const newValue = Number(event.target.value)
-
-		if (newValue <= 3 && newValue >= 1) {
-			setValue(newValue)
-		} else {
-			setValue(100)
-		}
 	}
 
 	return (
