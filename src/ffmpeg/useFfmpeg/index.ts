@@ -2,7 +2,7 @@ import { createFFmpeg } from "@ffmpeg/ffmpeg"
 
 const useFfmpeg = () => {
 	const ffmpeg = createFFmpeg({
-		log: false,
+		log: true,
 	})
 
 	const load = async () => {
