@@ -31,7 +31,7 @@ const VideoSuite: FC = () => {
 
 	const logs: string[] = []
 
-	const { handleClose, open } = useCustomDialog({ openFromProps: false })
+	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
 	useEffect(() => {
 		load().then((result) => setFFmpeg(result))
@@ -51,10 +51,24 @@ const VideoSuite: FC = () => {
 				ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt")
 			})
 
-			ffmpeg.setProgress(({ ratio }) => {
+			ffmpeg.setProgress(async ({ ratio }) => {
 				if (ratio === 1) {
 					const res = getFileData(logs)
 					console.log(res)
+
+					if ("wakeLock" in navigator) {
+						console.log("Screen Wake Lock API supported!")
+
+						let wakeLock = null;
+
+						// create an async function to request a wake lock
+						try {
+							wakeLock = await navigator.wakeLock.request("screen");
+						} catch (err) {
+							// The Wake Lock request has failed - usually system related, such as battery.
+							console.log(err)
+						}
+					}
 				}
 			})
 		}
