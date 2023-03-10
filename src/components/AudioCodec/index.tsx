@@ -43,11 +43,11 @@ const AudioCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'copy'}>Copy Original Codec</MenuItem>
-						<MenuItem value={'aac'}>AAC</MenuItem>
-						<MenuItem value={'aac3'}>AAC3</MenuItem>
-						<MenuItem value={'flac'}>FLAC</MenuItem>
-						<MenuItem value={'opus'}>Opus</MenuItem>
+						<MenuItem value={"copy"}>Copy Original Codec</MenuItem>
+						<MenuItem value={"aac"}>AAC</MenuItem>
+						<MenuItem value={"aac3"}>AAC3</MenuItem>
+						<MenuItem value={"flac"}>FLAC</MenuItem>
+						<MenuItem value={"opus"}>Opus</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>

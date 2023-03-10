@@ -38,28 +38,100 @@ const VideoFilters: FC = () => {
 	return (
 		<Grid container spacing={2} sx={{ paddingTop: "1rem" }}>
 			<Grid item xs={12}>
-				<CustomSlider min={0} max={3} initialValue={1} step={0.1} label="Saturation" id="saturation" marks showTextField />
+				<CustomSlider
+					min={0}
+					max={3}
+					initialValue={1}
+					step={0.1}
+					label="Saturation"
+					id="saturation"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={-1000} max={1000} initialValue={1} step={20} label="Contrast" id="contrast" marks showTextField />
+				<CustomSlider
+					min={-1000}
+					max={1000}
+					initialValue={1}
+					step={20}
+					label="Contrast"
+					id="contrast"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={-1} max={1} initialValue={0} step={0.1} label="Brightness" id="brightness" marks showTextField />
+				<CustomSlider
+					min={-1}
+					max={1}
+					initialValue={0}
+					step={0.1}
+					label="Brightness"
+					id="brightness"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={0.1} max={10} initialValue={1} step={0.1} label="Gamma" id="gamma" marks showTextField />
+				<CustomSlider
+					min={0.1}
+					max={10}
+					initialValue={1}
+					step={0.1}
+					label="Gamma"
+					id="gamma"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={0.1} max={10} initialValue={1} step={0.1} label="Gamma R" id="gamma_r" marks showTextField />
+				<CustomSlider
+					min={0.1}
+					max={10}
+					initialValue={1}
+					step={0.1}
+					label="Gamma R"
+					id="gamma_r"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={0.1} max={10} initialValue={1} step={0.1} label="Gamma G" id="gamma_g" marks showTextField />
+				<CustomSlider
+					min={0.1}
+					max={10}
+					initialValue={1}
+					step={0.1}
+					label="Gamma G"
+					id="gamma_g"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={0.1} max={10} initialValue={1} step={0.1} label="Gamma B" id="gamma_b" marks showTextField />
+				<CustomSlider
+					min={0.1}
+					max={10}
+					initialValue={1}
+					step={0.1}
+					label="Gamma B"
+					id="gamma_b"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12}>
-				<CustomSlider min={0.1} max={10} initialValue={1} step={0.1} label="Gamma Weight" id="gamma_weight" marks showTextField />
+				<CustomSlider
+					min={0.1}
+					max={10}
+					initialValue={1}
+					step={0.1}
+					label="Gamma Weight"
+					id="gamma_weight"
+					marks
+					showTextField
+				/>
 			</Grid>
 			<Grid item xs={12} sm={6} md={4}>
 				<FormControl fullWidth>
@@ -72,7 +144,7 @@ const VideoFilters: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={''}>Same as Source</MenuItem>
+						<MenuItem value={""}>Same as Source</MenuItem>
 						<MenuItem value={5}>5</MenuItem>
 						<MenuItem value={10}>10</MenuItem>
 						<MenuItem value={12}>12</MenuItem>

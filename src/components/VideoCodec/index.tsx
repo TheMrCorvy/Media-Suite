@@ -32,9 +32,9 @@ const VideoCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'mp4'}>MP4</MenuItem>
-						<MenuItem value={'mkv'}>MKV</MenuItem>
-						<MenuItem value={'webm'}>WEBM</MenuItem>
+						<MenuItem value={"mp4"}>MP4</MenuItem>
+						<MenuItem value={"mkv"}>MKV</MenuItem>
+						<MenuItem value={"webm"}>WEBM</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>
@@ -63,12 +63,12 @@ const VideoCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'copy'}>Copy Original Codec</MenuItem>
-						<MenuItem value={'libaom-av1'}>AV1</MenuItem>
-						<MenuItem value={'libx264'}>H.264</MenuItem>
-						<MenuItem value={'libx265'}>H.265</MenuItem>
-						<MenuItem value={'mpeg2'}>MPEG-2</MenuItem>
-						<MenuItem value={'libtheora'}>Theora</MenuItem>
+						<MenuItem value={"copy"}>Copy Original Codec</MenuItem>
+						<MenuItem value={"libaom-av1"}>AV1</MenuItem>
+						<MenuItem value={"libx264"}>H.264</MenuItem>
+						<MenuItem value={"libx265"}>H.265</MenuItem>
+						<MenuItem value={"mpeg2"}>MPEG-2</MenuItem>
+						<MenuItem value={"libtheora"}>Theora</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>
@@ -81,10 +81,8 @@ const VideoCodec: FC = () => {
 				</FormGroup>
 			</Grid>
 
-			<Grid item xs={12} >
-				<Typography variant="h5">
-					Encoder Options
-				</Typography>
+			<Grid item xs={12}>
+				<Typography variant="h5">Encoder Options</Typography>
 			</Grid>
 
 			<Grid item xs={12} sm={6} md={4}>
@@ -98,16 +96,16 @@ const VideoCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'ultrafast'}>UltraFast</MenuItem>
-						<MenuItem value={'superfast'}>Super Fast</MenuItem>
-						<MenuItem value={'veryfast'}>Very Fast</MenuItem>
-						<MenuItem value={'faster'}>Faster</MenuItem>
-						<MenuItem value={'fast'}>Fast</MenuItem>
-						<MenuItem value={'medium'}>Medium</MenuItem>
-						<MenuItem value={'slow'}>Slow</MenuItem>
-						<MenuItem value={'slower'}>Slower</MenuItem>
-						<MenuItem value={'veryslow'}>Very Slow</MenuItem>
-						<MenuItem value={'placebo'}>Placebo</MenuItem>
+						<MenuItem value={"ultrafast"}>UltraFast</MenuItem>
+						<MenuItem value={"superfast"}>Super Fast</MenuItem>
+						<MenuItem value={"veryfast"}>Very Fast</MenuItem>
+						<MenuItem value={"faster"}>Faster</MenuItem>
+						<MenuItem value={"fast"}>Fast</MenuItem>
+						<MenuItem value={"medium"}>Medium</MenuItem>
+						<MenuItem value={"slow"}>Slow</MenuItem>
+						<MenuItem value={"slower"}>Slower</MenuItem>
+						<MenuItem value={"veryslow"}>Very Slow</MenuItem>
+						<MenuItem value={"placebo"}>Placebo</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>
@@ -122,13 +120,13 @@ const VideoCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'film'}>Film</MenuItem>
-						<MenuItem value={'animation'}>Animation</MenuItem>
-						<MenuItem value={'grain'}>Grain</MenuItem>
-						<MenuItem value={'stillimage'}>Still Image</MenuItem>
-						<MenuItem value={'fastdecode'}>Fast Decode</MenuItem>
-						<MenuItem value={'zerolatency'}>Zero Latency</MenuItem>
-						<MenuItem value={'pjsmr'}>pjsmr</MenuItem>
+						<MenuItem value={"film"}>Film</MenuItem>
+						<MenuItem value={"animation"}>Animation</MenuItem>
+						<MenuItem value={"grain"}>Grain</MenuItem>
+						<MenuItem value={"stillimage"}>Still Image</MenuItem>
+						<MenuItem value={"fastdecode"}>Fast Decode</MenuItem>
+						<MenuItem value={"zerolatency"}>Zero Latency</MenuItem>
+						<MenuItem value={"pjsmr"}>pjsmr</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>
@@ -143,17 +141,15 @@ const VideoCodec: FC = () => {
 						onChange={handleChange}
 						variant="outlined"
 					>
-						<MenuItem value={'baseline'}>Baseline</MenuItem>
-						<MenuItem value={'main'}>Main</MenuItem>
-						<MenuItem value={'high'}>High</MenuItem>
-						<MenuItem value={'high10'}>High10</MenuItem>
-						<MenuItem value={'high422'}>High422</MenuItem>
-						<MenuItem value={'high444'}>High444</MenuItem>
+						<MenuItem value={"baseline"}>Baseline</MenuItem>
+						<MenuItem value={"main"}>Main</MenuItem>
+						<MenuItem value={"high"}>High</MenuItem>
+						<MenuItem value={"high10"}>High10</MenuItem>
+						<MenuItem value={"high422"}>High422</MenuItem>
+						<MenuItem value={"high444"}>High444</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>
-
-
 		</Grid>
 	)
 }
