@@ -40,7 +40,7 @@ const VideoCodec: FC = () => {
 			<Grid item xs={12} sm={8} md={10}>
 				<CustomSlider
 					showTextField
-					id='select-video-quality'
+					id="select-video-quality"
 					label="Select Video Quality"
 					min={0}
 					max={50}
