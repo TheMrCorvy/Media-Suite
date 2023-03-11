@@ -1,7 +1,7 @@
 import { createContext, useState } from "react"
 import { createFFmpeg, FFmpeg } from "@ffmpeg/ffmpeg"
-
 import { Props, FFmpegContextInterface } from "./types"
+
 const FFmpegContext = createContext<FFmpegContextInterface | null>(null)
 
 export const FFmpegProvider = ({ children }: Props) => {
@@ -18,8 +18,6 @@ export const FFmpegProvider = ({ children }: Props) => {
 
 		await ffmpegInstance.load()
 		await setFFmpeg(ffmpegInstance)
-
-		return
 	}
 
 	const value: FFmpegContextInterface = { load, ffmpeg }
