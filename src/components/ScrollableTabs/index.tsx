@@ -3,6 +3,11 @@ import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
 
+interface Props {
+	children: ReactElement[]
+	tabs: string[]
+}
+
 const ScrollableTabs: FC<Props> = ({ children, tabs }) => {
 	const [value, setValue] = useState(0)
 
@@ -60,11 +65,6 @@ const ScrollableTabs: FC<Props> = ({ children, tabs }) => {
 			{renderTabPanels()}
 		</>
 	)
-}
-
-interface Props {
-	children: ReactElement[]
-	tabs: string[]
 }
 
 export default ScrollableTabs
