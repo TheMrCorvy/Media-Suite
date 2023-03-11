@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useContext, useState, useEffect } from "react"
 
 import Grid from "@mui/material/Grid"
 import Card from "@mui/material/Card"
@@ -18,46 +18,49 @@ import Subtitles from "../components/Subtitles"
 import AudioCodec from "../components/AudioCodec"
 import AdvancedOptions from "../components/AdvancedOptions"
 
-import useFfmpeg from "../ffmpeg/useFfmpeg"
 import useCustomDialog from "../hooks/useCustomDialog"
 import useExtractLogsData from "../ffmpeg/useExtractLogsData"
 
-import { FFmpeg, fetchFile } from "@ffmpeg/ffmpeg"
+import { fetchFile } from "@ffmpeg/ffmpeg"
+import Context from "../context/Context"
+import { FFmpegContextInterface } from "../context/types"
 
 const VideoSuite: FC = () => {
-	const { load } = useFfmpeg()
-	const [ffmpeg, setFFmpeg] = useState<FFmpeg>()
+	const { load, ffmpeg } = useContext(Context) as FFmpegContextInterface
 	const { getFileData } = useExtractLogsData()
+	const [ready, setReady] = useState(false)
+
+	useEffect(() => {
+		load().then(() => setReady(true))
+	}, [])
 
 	const logs: string[] = []
 
 	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
-	useEffect(() => {
-		load().then((result) => setFFmpeg(result))
-	}, [])
-
-	const readFileProps = (file: FileList) => {
-		if (ffmpeg) {
-			ffmpeg.setLogger((log) => {
-				logs.push(log.message)
-			})
-
-			handleClose()
-
-			fetchFile(file[0]).then((testFile) => {
-				ffmpeg.FS("writeFile", "test.mkv", testFile)
-
-				ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt")
-			})
-
-			ffmpeg.setProgress(async ({ ratio }) => {
-				if (ratio === 1) {
-					const res = getFileData(logs)
-					console.log(res)
-				}
-			})
+	const readFileProps = async (file: FileList) => {
+		if (!ffmpeg) {
+			throw new Error("Something went wrong...")
 		}
+
+		ffmpeg.setLogger((log) => {
+			logs.push(log.message)
+		})
+
+		handleClose()
+
+		fetchFile(file[0]).then((testFile) => {
+			ffmpeg.FS("writeFile", "test.mkv", testFile)
+
+			ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt")
+		})
+
+		ffmpeg.setProgress(async ({ ratio }) => {
+			if (ratio === 1) {
+				const res = getFileData(logs)
+				console.log(res)
+			}
+		})
 	}
 
 	return (
@@ -142,7 +145,7 @@ const VideoSuite: FC = () => {
 
 			<CustomDialog
 				title={
-					ffmpeg
+					ready
 						? "Please select a video file to continue"
 						: "Wait while the app is loaidng..."
 				}
@@ -152,8 +155,8 @@ const VideoSuite: FC = () => {
 				hideCloseBtn
 				freeze
 			>
-				{!ffmpeg ? (
-					<Loader status={ffmpeg ? 100 : undefined} />
+				{!ready ? (
+					<Loader status={ready ? 100 : undefined} />
 				) : (
 					<SelectFile
 						fileType="video"
