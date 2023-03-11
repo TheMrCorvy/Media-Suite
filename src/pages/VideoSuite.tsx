@@ -22,11 +22,11 @@ import useCustomDialog from "../hooks/useCustomDialog"
 import useExtractLogsData from "../hooks/useExtractLogsData"
 
 import { fetchFile } from "@ffmpeg/ffmpeg"
-import Context from "../context/Context"
+import FFmpegContext from "../context/Context"
 import { FFmpegContextInterface } from "../context/types"
 
 const VideoSuite: FC = () => {
-	const { load, ffmpeg } = useContext(Context) as FFmpegContextInterface
+	const { load, ffmpeg } = useContext(FFmpegContext) as FFmpegContextInterface
 	const { getFileData } = useExtractLogsData()
 	const [ready, setReady] = useState(false)
 

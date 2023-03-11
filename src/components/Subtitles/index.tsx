@@ -1,37 +1,23 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 
 import Grid from "@mui/material/Grid"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select, { SelectChangeEvent } from "@mui/material/Select"
 import Typography from "@mui/material/Typography"
+import SelectItem from "../SelectItem"
 
 const Subtitles: FC = () => {
-	const [age, setAge] = useState("")
-
-	const handleChange = (event: SelectChangeEvent) => {
-		setAge(event.target.value as string)
-	}
-
 	return (
 		<Grid container spacing={2} sx={{ paddingTop: "1rem" }}>
 			<Grid item xs={12} sm={6} md={4}>
-				<FormControl fullWidth>
-					<InputLabel id="demo-simple-select-label">render subtitles</InputLabel>
-					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						value={age}
-						label="video codec"
-						onChange={handleChange}
-						variant="outlined"
-					>
-						<MenuItem value={10}>Ten</MenuItem>
-						<MenuItem value={20}>Twenty</MenuItem>
-						<MenuItem value={30}>Thirty</MenuItem>
-					</Select>
-				</FormControl>
+				<SelectItem
+					id="subtitles"
+					label="Render Subtitles"
+					fullWidth
+					items={[
+						{ name: "10", value: "10" },
+						{ name: "12", value: "12" },
+						{ name: "15", value: "15" },
+					]}
+				/>
 			</Grid>
 			<Grid item xs={12}>
 				<Typography variant="body1">language, file format, name, etc.</Typography>
