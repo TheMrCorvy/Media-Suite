@@ -9,7 +9,7 @@ export const FFmpegProvider = ({ children }: Props) => {
 
 	const load = async () => {
 		if (ffmpeg) {
-			return ffmpeg
+			return
 		}
 
 		const ffmpegInstance = createFFmpeg({
@@ -19,7 +19,7 @@ export const FFmpegProvider = ({ children }: Props) => {
 		await ffmpegInstance.load()
 		await setFFmpeg(ffmpegInstance)
 
-		return ffmpegInstance
+		return
 	}
 
 	const value: FFmpegContextInterface = { load, ffmpeg }

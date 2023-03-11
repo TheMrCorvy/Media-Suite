@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 
 export interface FFmpegContextInterface {
-	load: () => Promise<FFmpeg>
+	load: () => Promise<void>
 	ffmpeg: FFmpeg | null
 }
 
