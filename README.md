@@ -49,7 +49,6 @@ The main goal of the project is to basically be a UI for the FFMPEG library that
 │   ├── hooks
 │   │   └── useCustomHook
 │   │       ├── index.ts
-│   │       ├── test.json
 │   │       ├── types.ts
 │   │       └── useCustomHook.test.ts
 │   ├── pages
@@ -61,4 +60,5 @@ The main goal of the project is to basically be a UI for the FFMPEG library that
 ## Project dependencies
 
 [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm) - For processing files
+
 [Material UI](https://material-ui.com/) - As the UI
