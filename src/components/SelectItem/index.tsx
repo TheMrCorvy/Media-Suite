@@ -28,7 +28,9 @@ const SelectItem: FC<Props> = ({ id, label, items, defaultOption, fullWidth, var
 
 	return (
 		<FormControl fullWidth={fullWidth}>
-			<InputLabel id={`select-item-label-${id}`}>{label}</InputLabel>
+			<InputLabel data-testid={id} id={`select-item-label-${id}`}>
+				{label}
+			</InputLabel>
 			<Select
 				labelId={`select-item-label-${id}`}
 				id={`select-item-menu-${id}`}
