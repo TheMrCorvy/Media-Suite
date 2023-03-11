@@ -19,7 +19,7 @@ import AudioCodec from "../components/AudioCodec"
 import AdvancedOptions from "../components/AdvancedOptions"
 
 import useCustomDialog from "../hooks/useCustomDialog"
-import useExtractLogsData from "../ffmpeg/useExtractLogsData"
+import useExtractLogsData from "../hooks/useExtractLogsData"
 
 import { fetchFile } from "@ffmpeg/ffmpeg"
 import Context from "../context/Context"
