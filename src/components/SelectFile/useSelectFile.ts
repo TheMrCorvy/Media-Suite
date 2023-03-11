@@ -23,7 +23,9 @@ const useSelectFiles = ({ includeExtensions, fileType, callback }: useSelectFile
 		return str
 	}
 
-	useEffect(() => fileList && callback(fileList), [fileList])
+	useEffect(() => {
+		fileList && callback(fileList)
+	}, [fileList])
 
 	const accept = () => {
 		if (fileType !== "*") {
