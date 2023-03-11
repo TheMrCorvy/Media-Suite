@@ -129,7 +129,7 @@ const VideoSuite: FC = () => {
 									"video filters",
 									"subtitles",
 									"audio codec",
-									"advenced",
+									"advanced",
 								]}
 							>
 								<VideoCodec />
