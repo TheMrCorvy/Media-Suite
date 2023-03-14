@@ -38,7 +38,14 @@ export const FFmpegProvider = ({ children }: Props) => {
 		return true
 	}
 
-	const value: FFmpegContextInterface = { load, ffmpeg, ffmpegSettings, queue, addToQueue, nextJob }
+	const value: FFmpegContextInterface = {
+		load,
+		ffmpeg,
+		ffmpegSettings,
+		queue,
+		addToQueue,
+		nextJob,
+	}
 
 	return <FFmpegContext.Provider value={value}>{children}</FFmpegContext.Provider>
 }
