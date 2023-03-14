@@ -29,6 +29,7 @@ const VideoSuite: FC = () => {
 	const { load, ffmpeg } = useContext(FFmpegContext) as FFmpegContextInterface
 	const { getFileData } = useExtractLogsData()
 	const [ready, setReady] = useState(false)
+	const [previewUrl, setPreviewUrl] = useState("")
 
 	useEffect(() => {
 		load().then(() => setReady(true))
@@ -49,11 +50,11 @@ const VideoSuite: FC = () => {
 
 		setReady(false)
 
-		fetchFile(files[index ? index : 0]).then((testFile) => {
-			ffmpeg.FS("writeFile", "test.mkv", testFile)
+		const inputFile = files[index ? index : 0]
 
-			ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt")
-		})
+		const resFile = await fetchFile(inputFile)
+		ffmpeg.FS("writeFile", inputFile.name, resFile)
+		ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
 
 		ffmpeg.setProgress(async ({ ratio }) => {
 			if (ratio === 1) {
@@ -62,9 +63,48 @@ const VideoSuite: FC = () => {
 				const inputExtension = inputName.substring(lastDot + 1)
 
 				const res = getFileData(logs)
-				console.log({ ...res, inputName, inputExtension })
+
+				await generatePreviewUrl(res.basicInfo[0], inputFile)
+
+				console.log({ ...res, inputName, inputExtension, previewUrl })
 				setReady(true)
 				handleClose()
+			}
+		})
+	}
+
+	const generatePreviewUrl = async (durationStr: string, video: File) => {
+		const strArr = durationStr.split(":")
+		let minutes = Number(strArr[2])
+		let logs: string[] = []
+
+		if (!ffmpeg) {
+			throw new Error("Something went wrong...")
+		}
+
+		ffmpeg.setLogger((log) => {
+			logs.push(log.message)
+		})
+
+		const resFile = await fetchFile(video)
+		await ffmpeg.FS("writeFile", video.name, resFile)
+		await ffmpeg.run(
+			"-ss",
+			`00:${Math.floor(Math.random() * minutes)}:00`,
+			"-i",
+			video.name,
+			"-frames:v",
+			"1",
+			"-q:v",
+			"2",
+			"preview.jpg"
+		)
+
+		ffmpeg.setProgress(async ({ ratio }) => {
+			if (ratio === 1) {
+				const data = ffmpeg.FS("readFile", "preview.jpg")
+				const url = URL.createObjectURL(new Blob([data.buffer], { type: "image/jpg" }))
+				setPreviewUrl(url)
 			}
 		})
 	}
@@ -84,7 +124,9 @@ const VideoSuite: FC = () => {
 							<Card sx={{ aspectRatio: "16 / 9" }}>
 								<CardMedia
 									sx={{ height: "100%", width: "100%" }}
-									image="./src/assets/lycoris_test.jpg"
+									image={
+										previewUrl ? previewUrl : "./src/assets/lycoris_test.jpg"
+									}
 									title="green iguana"
 								/>
 							</Card>
