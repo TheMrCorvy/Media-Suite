@@ -27,9 +27,11 @@ The main goal of the project is to basically be a UI for the FFMPEG library that
 ## Other useful commands
 
 -   Lint for checking if the files are all well written, or if the good practices are being followed correctly.
+
     `npm run lint`
 
--   Format _ALL_ the files in the project (with the obvious exception of the folders _dist_ and _node modules_)
+-   Format _ALL_ the files in the project (with the obvious exception of the folders _dist_ and _node modules_).
+
     `npm run format`
 
 ---
@@ -37,22 +39,22 @@ The main goal of the project is to basically be a UI for the FFMPEG library that
 ## Folder structure
 
 ```
-├── src
-│   ├── assets
-│   ├── components
-│   │   ├── ComponentName
-│   │   │   ├── ComponentName.test.tsx
-│   │   │   ├── styles
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   ├── context
-│   ├── hooks
-│   │   └── useCustomHook
-│   │       ├── index.ts
-│   │       ├── types.ts
-│   │       └── useCustomHook.test.ts
-│   ├── pages
-│   │   └── Page.tsx
+src
+├── assets
+├── components
+│   ├── ComponentName
+│   ├── ComponentName.test.tsx
+│   │   ├── styles
+│   │   ├── index.tsx
+│   │   └── types.ts
+├── context
+├── hooks
+│   └── useCustomHook
+│       ├── index.ts
+│       ├── types.ts
+│       └── useCustomHook.test.ts
+├── pages
+│   └── Page.tsx
 ```
 
 ---

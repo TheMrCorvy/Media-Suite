@@ -39,7 +39,9 @@
 		],
 		"fileFormat": " matroska",
 		"fileQuality": "webm",
-		"basicInfo": ["  Duration: 00:24:02.08", " start: 0.000000", " bitrate: 8165 kb/s"]
+		"basicInfo": ["  Duration: 00:24:02.08", " start: 0.000000", " bitrate: 8165 kb/s"],
+		"inputName": "",
+		"inputExtension": ""
 	},
 	"testLogs": [
 		"run FS.writeFile test.mkv <1471948367 bytes binary file>",
