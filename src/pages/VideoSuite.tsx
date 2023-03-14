@@ -34,11 +34,11 @@ const VideoSuite: FC = () => {
 		load().then(() => setReady(true))
 	}, [])
 
-	const logs: string[] = []
-
 	const { handleClose, open } = useCustomDialog({ openFromProps: true })
 
-	const readFileProps = async (file: FileList) => {
+	const readFileProps = async (files: FileList, index?: number) => {
+		let logs: string[] = []
+
 		if (!ffmpeg) {
 			throw new Error("Something went wrong...")
 		}
@@ -47,18 +47,21 @@ const VideoSuite: FC = () => {
 			logs.push(log.message)
 		})
 
-		handleClose()
+		setReady(false)
 
-		fetchFile(file[0]).then((testFile) => {
+		fetchFile(files[index ? index : 0]).then((testFile) => {
 			ffmpeg.FS("writeFile", "test.mkv", testFile)
 
 			ffmpeg.run("-i", "test.mkv", "-f", "ffmetadata", "metadata.txt")
 		})
 
 		ffmpeg.setProgress(async ({ ratio }) => {
+
 			if (ratio === 1) {
 				const res = getFileData(logs)
 				console.log(res)
+				setReady(true)
+				handleClose()
 			}
 		})
 	}
