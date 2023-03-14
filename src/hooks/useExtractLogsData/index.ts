@@ -6,6 +6,8 @@ const useExtractLogsData = () => {
 		fileFormat: "",
 		fileQuality: "",
 		basicInfo: [],
+		inputName: "",
+		inputExtension: "",
 	}
 	let stream: Stream = {
 		type: "",

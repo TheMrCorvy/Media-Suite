@@ -1,14 +1,13 @@
 import { createContext, useState } from "react"
 import { createFFmpeg, FFmpeg } from "@ffmpeg/ffmpeg"
-import { Props, FFmpegContextInterface } from "./types"
+import { Props, FFmpegContextInterface, JobQueue, JobItem } from "./types"
 import { ffmpegSettings } from "./settings"
 
 const FFmpegContext = createContext<FFmpegContextInterface | null>(null)
 
 export const FFmpegProvider = ({ children }: Props) => {
 	const [ffmpeg, setFFmpeg] = useState<FFmpeg | null>(null)
-	const [files, setFiles] = useState<FileList>()
-	const [currentJob, setCurrentJob] = useState<number>(0)
+	const [queue, setQueue] = useState<JobQueue>([])
 
 	const load = async () => {
 		if (ffmpeg) {
@@ -23,11 +22,23 @@ export const FFmpegProvider = ({ children }: Props) => {
 		await setFFmpeg(ffmpegInstance)
 	}
 
-	const updateQueue = (files: FileList) => {
-		setFiles(files)
+	const addToQueue = (job: JobItem) => {
+		setQueue([...queue, job])
 	}
 
-	const value: FFmpegContextInterface = { load, ffmpeg, ffmpegSettings }
+	const nextJob = () => {
+		if (queue.length > 1) {
+			const newQueue = queue
+			newQueue.shift()
+			setQueue(newQueue)
+
+			return false
+		}
+
+		return true
+	}
+
+	const value: FFmpegContextInterface = { load, ffmpeg, ffmpegSettings, queue, addToQueue, nextJob }
 
 	return <FFmpegContext.Provider value={value}>{children}</FFmpegContext.Provider>
 }

@@ -57,8 +57,12 @@ const VideoSuite: FC = () => {
 
 		ffmpeg.setProgress(async ({ ratio }) => {
 			if (ratio === 1) {
+				const inputName = files[0].name
+				const lastDot = inputName.lastIndexOf('.');
+				const inputExtension = inputName.substring(lastDot + 1)
+
 				const res = getFileData(logs)
-				console.log(res)
+				console.log({ ...res, inputName, inputExtension })
 				setReady(true)
 				handleClose()
 			}
@@ -164,6 +168,7 @@ const VideoSuite: FC = () => {
 						fileType="video"
 						includeExtensions={["mkv"]}
 						callback={readFileProps}
+						multiple
 					/>
 				)}
 			</CustomDialog>

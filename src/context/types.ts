@@ -1,10 +1,14 @@
 import { ReactNode } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
+import { FileInfo } from "../hooks/useExtractLogsData/types"
 
 export interface FFmpegContextInterface {
 	load: () => Promise<void>
 	ffmpeg: FFmpeg | null
 	ffmpegSettings: FFmpegSettings
+	queue: JobQueue
+	addToQueue: (job: JobItem) => void
+	nextJob: () => boolean // queue is over = true, otherwise false
 }
 
 export interface Props {
@@ -37,4 +41,15 @@ export interface FFmpegSettings {
 	audioFilters: {
 		[key: string]: StringSetting[] | RangeSetting
 	}
+}
+
+export type JobQueue = JobItem[]
+
+export interface JobItem {
+	file: File
+	fileInfo: FileInfo
+	previewUrl: string
+	command: string[]
+	settingsSelected: FFmpegSettings
+	readyToStart: boolean
 }

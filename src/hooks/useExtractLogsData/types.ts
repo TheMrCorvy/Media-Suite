@@ -11,6 +11,8 @@ export interface FileInfo {
 	fileFormat: string
 	fileQuality: string
 	basicInfo: string[]
+	inputName: string
+	inputExtension: string
 }
 
 export type ExecFunction = (index: number) => boolean // true => break | false => continue
