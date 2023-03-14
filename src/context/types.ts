@@ -11,22 +11,30 @@ export interface Props {
 	children: ReactNode
 }
 
-interface StringSetting {
+export interface StringSetting {
 	name: string
 	value: string
 }
 
-interface RangeSetting {
+export interface RangeSetting {
 	min: number
 	max: number
+	step: number
 	defaultOption?: number
 }
 
 export interface FFmpegSettings {
-	stringSettings: {
-		[key: string]: StringSetting[]
+	videoCodec: {
+		[key: string]: StringSetting[] | RangeSetting
 	}
-	rangeSettings: {
-		[key: string]: RangeSetting
+	subtitles: any // just for now
+	videoFilters: {
+		[key: string]: StringSetting[] | RangeSetting
+	}
+	audioCodec: {
+		[key: string]: StringSetting[] | RangeSetting
+	}
+	audioFilters: {
+		[key: string]: StringSetting[] | RangeSetting
 	}
 }

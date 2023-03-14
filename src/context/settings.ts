@@ -1,7 +1,13 @@
 import { FFmpegSettings } from "./types"
 
 export const ffmpegSettings: FFmpegSettings = {
-	stringSettings: {
+	videoCodec: {
+		csrf: {
+			min: 0,
+			max: 50,
+			defaultOption: 1,
+			step: 1,
+		},
 		outputFormats: [
 			{
 				name: "MP4",
@@ -16,7 +22,7 @@ export const ffmpegSettings: FFmpegSettings = {
 				value: "webm",
 			},
 		],
-		videoCodecs: [
+		codecs: [
 			{
 				name: "Copy Original Codec",
 				value: "copy",
@@ -140,6 +146,9 @@ export const ffmpegSettings: FFmpegSettings = {
 				value: "high444",
 			},
 		],
+	},
+	subtitles: {},
+	videoFilters: {
 		framerate: [
 			{
 				name: "5",
@@ -161,14 +170,64 @@ export const ffmpegSettings: FFmpegSettings = {
 			{ name: "100", value: "100" },
 			{ name: "120", value: "120" },
 		],
-		audioCodecs: [
+		saturation: {
+			min: 0,
+			max: 3,
+			step: 0.1,
+			defaultOption: 1,
+		},
+		contrast: {
+			min: -1000,
+			max: 1000,
+			step: 20,
+			defaultOption: 1,
+		},
+		brightness: {
+			min: -1,
+			max: 1,
+			step: 0.1,
+			defaultOption: 0,
+		},
+		gamma: {
+			min: 0.1,
+			max: 10,
+			step: 0.1,
+			defaultOption: 1,
+		},
+		gammaR: {
+			min: 0.1,
+			max: 10,
+			step: 0.1,
+			defaultOption: 1,
+		},
+		gammaG: {
+			min: 0.1,
+			max: 10,
+			step: 0.1,
+			defaultOption: 1,
+		},
+		gammaB: {
+			min: 0.1,
+			max: 10,
+			step: 0.1,
+			defaultOption: 1,
+		},
+		gammaWeight: {
+			min: 0.1,
+			max: 10,
+			step: 0.1,
+			defaultOption: 1,
+		},
+	},
+	audioCodec: {
+		codecs: [
 			{ name: "Copy Original Codec", value: "copy" },
 			{ name: "AAC", value: "aac" },
 			{ name: "AAC3", value: "aac3" },
 			{ name: "FLAC", value: "flac" },
 			{ name: "Opus", value: "opus" },
 		],
-		audioBitrate: [
+		bitrate: [
 			{ name: "24", value: "24" },
 			{ name: "32", value: "32" },
 			{ name: "40", value: "40" },
@@ -186,26 +245,5 @@ export const ffmpegSettings: FFmpegSettings = {
 			{ name: "320", value: "320" },
 		],
 	},
-	rangeSettings: {
-		saturation: {
-			min: 0,
-			max: 3,
-			defaultOption: 1,
-		},
-		contrast: {
-			min: -1000,
-			max: 1000,
-			defaultOption: 1,
-		},
-		brightness: {
-			min: -1,
-			max: 1,
-			defaultOption: 0,
-		},
-		gamma: {
-			min: 0.1,
-			max: 10,
-			defaultOption: 1,
-		},
-	},
+	audioFilters: {},
 }

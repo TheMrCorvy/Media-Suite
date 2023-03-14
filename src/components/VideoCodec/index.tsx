@@ -10,11 +10,16 @@ import CustomSlider from "../CustomSlider"
 import SelectItem from "../SelectItem"
 
 import FFmpegContext from "../../context/Context"
-import { FFmpegContextInterface } from "../../context/types"
+import { FFmpegContextInterface, StringSetting, RangeSetting } from "../../context/types"
 
 const VideoCodec: FC = () => {
 	const { ffmpegSettings } = useContext(FFmpegContext) as FFmpegContextInterface
-	const settings = ffmpegSettings.stringSettings
+	const outputFormats = ffmpegSettings.videoCodec.outputFormats as StringSetting[]
+	const videoCodecs = ffmpegSettings.videoCodec.codecs as StringSetting[]
+	const presets = ffmpegSettings.videoCodec.presets as StringSetting[]
+	const tune = ffmpegSettings.videoCodec.tune as StringSetting[]
+	const profiles = ffmpegSettings.videoCodec.profiles as StringSetting[]
+	const csrf = ffmpegSettings.videoCodec.csrf as RangeSetting
 
 	return (
 		<Grid container spacing={2} sx={{ paddingTop: "1rem" }}>
@@ -24,7 +29,7 @@ const VideoCodec: FC = () => {
 					label="Output Format"
 					variant="outlined"
 					fullWidth
-					items={settings.outputFormats}
+					items={outputFormats}
 				/>
 			</Grid>
 
@@ -33,10 +38,10 @@ const VideoCodec: FC = () => {
 					showTextField
 					id="select-video-quality"
 					label="Select Video Quality"
-					min={0}
-					max={50}
-					initialValue={23}
-					step={1}
+					min={csrf.min}
+					max={csrf.max}
+					initialValue={csrf.defaultOption}
+					step={csrf.step}
 					marks
 				/>
 			</Grid>
@@ -45,10 +50,10 @@ const VideoCodec: FC = () => {
 				<SelectItem
 					id="video-codec"
 					label="Video Codec"
-					defaultOption={settings.videoCodecs[2]}
+					defaultOption={videoCodecs[2]}
 					variant="outlined"
 					fullWidth
-					items={settings.videoCodecs}
+					items={videoCodecs}
 				/>
 			</Grid>
 			<Grid item>
@@ -68,20 +73,14 @@ const VideoCodec: FC = () => {
 				<SelectItem
 					id="presets"
 					label="Preset (Encoding Speed)"
-					defaultOption={settings.presets[4]}
+					defaultOption={presets[4]}
 					variant="outlined"
 					fullWidth
-					items={settings.presets}
+					items={presets}
 				/>
 			</Grid>
 			<Grid item xs={12} sm={6} md={4}>
-				<SelectItem
-					id="tune"
-					label="Tune"
-					variant="outlined"
-					fullWidth
-					items={settings.tune}
-				/>
+				<SelectItem id="tune" label="Tune" variant="outlined" fullWidth items={tune} />
 			</Grid>
 			<Grid item xs={12} sm={6} md={4}>
 				<SelectItem
@@ -89,7 +88,7 @@ const VideoCodec: FC = () => {
 					label="Profile"
 					variant="outlined"
 					fullWidth
-					items={settings.profiles}
+					items={profiles}
 				/>
 			</Grid>
 		</Grid>

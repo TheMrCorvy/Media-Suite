@@ -5,21 +5,29 @@ import Grid from "@mui/material/Grid"
 import CustomSlider from "../CustomSlider"
 import SelectItem from "../SelectItem"
 
-import { FFmpegContextInterface } from "../../context/types"
 import FFmpegContext from "../../context/Context"
+import { FFmpegContextInterface, StringSetting, RangeSetting } from "../../context/types"
 
 const VideoFilters: FC = () => {
 	const { ffmpegSettings } = useContext(FFmpegContext) as FFmpegContextInterface
-	const set = ffmpegSettings.rangeSettings
+	const saturation = ffmpegSettings.videoFilters.saturation as RangeSetting
+	const contrast = ffmpegSettings.videoFilters.contrast as RangeSetting
+	const brightness = ffmpegSettings.videoFilters.brightness as RangeSetting
+	const gamma = ffmpegSettings.videoFilters.gamma as RangeSetting
+	const gammaR = ffmpegSettings.videoFilters.gammaR as RangeSetting
+	const gammaG = ffmpegSettings.videoFilters.gammaG as RangeSetting
+	const gammaB = ffmpegSettings.videoFilters.gammaB as RangeSetting
+	const gammaWeight = ffmpegSettings.videoFilters.gammaWeight as RangeSetting
+	const framerate = ffmpegSettings.videoFilters.framerate as StringSetting[]
 
 	return (
 		<Grid container spacing={2} sx={{ paddingTop: "1rem" }}>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.saturation.min}
-					max={set.saturation.max}
-					initialValue={set.saturation.defaultOption}
-					step={0.1}
+					min={saturation.min}
+					max={saturation.max}
+					initialValue={saturation.defaultOption}
+					step={saturation.step}
 					label="Saturation"
 					id="saturation"
 					marks
@@ -28,10 +36,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.contrast.min}
-					max={set.contrast.max}
-					initialValue={set.contrast.defaultOption}
-					step={20}
+					min={contrast.min}
+					max={contrast.max}
+					initialValue={contrast.defaultOption}
+					step={contrast.step}
 					label="Contrast"
 					id="contrast"
 					marks
@@ -40,10 +48,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.brightness.min}
-					max={set.brightness.max}
-					initialValue={set.brightness.defaultOption}
-					step={0.1}
+					min={brightness.min}
+					max={brightness.max}
+					initialValue={brightness.defaultOption}
+					step={brightness.step}
 					label="Brightness"
 					id="brightness"
 					marks
@@ -52,10 +60,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.gamma.min}
-					max={set.gamma.max}
-					initialValue={set.gamma.defaultOption}
-					step={0.1}
+					min={gamma.min}
+					max={gamma.max}
+					initialValue={gamma.defaultOption}
+					step={gamma.step}
 					label="Gamma"
 					id="gamma"
 					marks
@@ -64,10 +72,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.gamma.min}
-					max={set.gamma.max}
-					initialValue={set.gamma.defaultOption}
-					step={0.1}
+					min={gammaR.min}
+					max={gammaR.max}
+					initialValue={gammaR.defaultOption}
+					step={gammaR.step}
 					label="Gamma R"
 					id="gamma_r"
 					marks
@@ -76,10 +84,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.gamma.min}
-					max={set.gamma.max}
-					initialValue={set.gamma.defaultOption}
-					step={0.1}
+					min={gammaG.min}
+					max={gammaG.max}
+					initialValue={gammaG.defaultOption}
+					step={gammaG.step}
 					label="Gamma G"
 					id="gamma_g"
 					marks
@@ -88,10 +96,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.gamma.min}
-					max={set.gamma.max}
-					initialValue={set.gamma.defaultOption}
-					step={0.1}
+					min={gammaB.min}
+					max={gammaB.max}
+					initialValue={gammaB.defaultOption}
+					step={gammaB.step}
 					label="Gamma B"
 					id="gamma_b"
 					marks
@@ -100,10 +108,10 @@ const VideoFilters: FC = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<CustomSlider
-					min={set.gamma.min}
-					max={set.gamma.max}
-					initialValue={set.gamma.defaultOption}
-					step={0.1}
+					min={gammaWeight.min}
+					max={gammaWeight.max}
+					initialValue={gammaWeight.defaultOption}
+					step={gammaWeight.step}
 					label="Gamma Weight"
 					id="gamma_weight"
 					marks
@@ -116,7 +124,7 @@ const VideoFilters: FC = () => {
 					label="Framerate FPS"
 					variant="outlined"
 					fullWidth
-					items={ffmpegSettings.stringSettings.framerate}
+					items={framerate}
 				/>
 			</Grid>
 		</Grid>

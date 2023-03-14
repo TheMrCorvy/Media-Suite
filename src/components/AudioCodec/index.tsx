@@ -7,9 +7,12 @@ import SelectItem from "../SelectItem"
 import { FFmpegContextInterface } from "../../context/types"
 import FFmpegContext from "../../context/Context"
 
+import { StringSetting } from "../../context/types"
+
 const AudioCodec: FC = () => {
 	const { ffmpegSettings } = useContext(FFmpegContext) as FFmpegContextInterface
-	const set = ffmpegSettings.stringSettings
+	const audioCodecs = ffmpegSettings.audioCodec.codecs as StringSetting[]
+	const audioBitrate = ffmpegSettings.audioCodec.bitrate as StringSetting[]
 
 	return (
 		<Grid container spacing={2} sx={{ paddingTop: "1rem" }}>
@@ -28,18 +31,18 @@ const AudioCodec: FC = () => {
 			<Grid item xs={12} sm={6} md={4} lg={3}>
 				<SelectItem
 					fullWidth
-					items={set.audioCodecs}
+					items={audioCodecs}
 					id="audio-encoder"
-					defaultOption={set.audioCodecs[0]}
+					defaultOption={audioCodecs[0]}
 					label="Audio Codec"
 				/>
 			</Grid>
 			<Grid item xs={12} sm={6} md={4} lg={3}>
 				<SelectItem
 					fullWidth
-					items={set.audioBitrate}
+					items={audioBitrate}
 					id="audio-bitrate"
-					defaultOption={set.audioBitrate[15]}
+					defaultOption={audioBitrate[15]}
 					label="Audio Bitrate"
 				/>
 			</Grid>
