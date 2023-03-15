@@ -10,9 +10,9 @@ export const FFmpegProvider = ({ children }: Props) => {
 	const [queue, setQueue] = useState<JobQueue>([])
 
 	const load = async () => {
-		if (ffmpeg) {
-			return
-		}
+		// if (ffmpeg) {
+		// 	return
+		// }
 
 		const ffmpegInstance = createFFmpeg({
 			log: true,
@@ -20,10 +20,19 @@ export const FFmpegProvider = ({ children }: Props) => {
 
 		await ffmpegInstance.load()
 		await setFFmpeg(ffmpegInstance)
+
+		return ffmpegInstance
 	}
 
 	const addToQueue = (job: JobItem) => {
 		setQueue([...queue, job])
+	}
+
+	const exit = async () => {
+		if (!ffmpeg) return
+
+		await ffmpeg.exit()
+		setFFmpeg(null)
 	}
 
 	const nextJob = () => {
@@ -45,6 +54,7 @@ export const FFmpegProvider = ({ children }: Props) => {
 		queue,
 		addToQueue,
 		nextJob,
+		exit,
 	}
 
 	return <FFmpegContext.Provider value={value}>{children}</FFmpegContext.Provider>
