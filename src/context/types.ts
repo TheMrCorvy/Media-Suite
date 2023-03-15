@@ -3,12 +3,13 @@ import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { FileInfo } from "../hooks/useExtractLogsData/types"
 
 export interface FFmpegContextInterface {
-	load: () => Promise<void>
+	load: () => Promise<FFmpeg>
 	ffmpeg: FFmpeg | null
 	ffmpegSettings: FFmpegSettings
 	queue: JobQueue
 	addToQueue: (job: JobItem) => void
 	nextJob: () => boolean // queue is over = true, otherwise false
+	exit: () => Promise<void>
 }
 
 export interface Props {

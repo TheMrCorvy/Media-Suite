@@ -26,13 +26,15 @@ import FFmpegContext from "../context/Context"
 import { FFmpegContextInterface } from "../context/types"
 
 const VideoSuite: FC = () => {
-	const { load, ffmpeg } = useContext(FFmpegContext) as FFmpegContextInterface
+	const { load, ffmpeg, exit } = useContext(FFmpegContext) as FFmpegContextInterface
 	const { getFileData } = useExtractLogsData()
 	const [ready, setReady] = useState(false)
 	const [previewUrl, setPreviewUrl] = useState("")
 
 	useEffect(() => {
-		load().then(() => setReady(true))
+		load().then(() => {
+			setReady(true)
+		})
 	}, [])
 
 	const { handleClose, open } = useCustomDialog({ openFromProps: true })
@@ -43,33 +45,30 @@ const VideoSuite: FC = () => {
 		if (!ffmpeg) {
 			throw new Error("Something went wrong...")
 		}
+		setReady(false)
 
 		ffmpeg.setLogger((log) => {
 			logs.push(log.message)
 		})
 
-		setReady(false)
-
 		const inputFile = files[index ? index : 0]
-
 		const resFile = await fetchFile(inputFile)
 
-		ffmpeg.FS("writeFile", inputFile.name, resFile)
-		ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
+		await ffmpeg.FS("writeFile", inputFile.name, resFile)
+		await ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
 
-		ffmpeg.setProgress(async ({ ratio }) => {
-			if (ratio === 1) {
-				const inputName = inputFile.name
-				const lastDot = inputName.lastIndexOf(".")
-				const inputExtension = inputName.substring(lastDot + 1)
+		ffmpeg.FS("unlink", inputFile.name)
+		const inputName = inputFile.name
+		const lastDot = inputName.lastIndexOf(".")
+		const inputExtension = inputName.substring(lastDot + 1)
+		const res = getFileData(logs)
 
-				const res = getFileData(logs)
+		console.clear()
+		await exit()
 
-				await generatePreviewUrl(res.basicInfo[0], inputFile)
+		console.log({ ...res, inputName, inputExtension, previewUrl })
 
-				console.log({ ...res, inputName, inputExtension, previewUrl })
-			}
-		})
+		generatePreviewUrl(res.basicInfo[0], inputFile)
 	}
 
 	const createTimeStamp = (minutes: number, seconds: number) => {
@@ -87,19 +86,23 @@ const VideoSuite: FC = () => {
 		const timeStamp = createTimeStamp(minutes, seconds)
 		let logs: string[] = []
 
-		console.log({ minutes, video })
-
 		if (!ffmpeg) {
 			throw new Error("Something went wrong...")
 		}
 
-		ffmpeg.setLogger((log) => {
+		const newFFmpeg = await load()
+
+		if (!newFFmpeg.isLoaded()) {
+			await load()
+		}
+
+		newFFmpeg.setLogger((log) => {
 			logs.push(log.message)
 		})
 
 		const resFile = await fetchFile(video)
-		await ffmpeg.FS("writeFile", video.name, resFile)
-		await ffmpeg.run(
+		await newFFmpeg.FS("writeFile", video.name, resFile)
+		await newFFmpeg.run(
 			"-ss",
 			timeStamp,
 			"-i",
@@ -111,16 +114,13 @@ const VideoSuite: FC = () => {
 			"preview.jpg"
 		)
 
-		ffmpeg.setProgress(async ({ ratio }) => {
-			if (ratio === 1) {
-				const data = ffmpeg.FS("readFile", "preview.jpg")
-				const url = URL.createObjectURL(new Blob([data.buffer], { type: "image/jpg" }))
-				setPreviewUrl(url)
-
-				setReady(true)
-				handleClose()
-			}
-		})
+		const data = newFFmpeg.FS("readFile", "preview.jpg")
+		const url = URL.createObjectURL(new Blob([data.buffer], { type: "image/jpg" }))
+		setPreviewUrl(url)
+		setReady(true)
+		handleClose()
+		newFFmpeg.FS("unlink", video.name)
+		newFFmpeg.FS("unlink", "preview.jpg")
 	}
 
 	return (
@@ -218,7 +218,7 @@ const VideoSuite: FC = () => {
 				freeze
 			>
 				{!ready ? (
-					<Loader status={ready ? 100 : undefined} growingValue={5} />
+					<Loader maxLimit={95} growingValue={5} />
 				) : (
 					<SelectFile
 						fileType="video"
