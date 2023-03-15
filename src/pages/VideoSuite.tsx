@@ -30,6 +30,7 @@ const VideoSuite: FC = () => {
 	const { getFileData } = useExtractLogsData()
 	const [ready, setReady] = useState(false)
 	const [previewUrl, setPreviewUrl] = useState("")
+	const [prueba, setPrueba] = useState<string[]>([])
 
 	useEffect(() => {
 		load().then(() => setReady(true))
@@ -53,16 +54,20 @@ const VideoSuite: FC = () => {
 		const inputFile = files[index ? index : 0]
 
 		const resFile = await fetchFile(inputFile)
-		ffmpeg.FS("writeFile", inputFile.name, resFile)
-		ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
+		console.log(resFile)
 
-		ffmpeg.setProgress(async ({ ratio }) => {
+		await ffmpeg.FS("writeFile", inputFile.name, resFile)
+		await ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
+
+		await ffmpeg.setProgress(async ({ ratio }) => {
 			if (ratio === 1) {
 				const inputName = files[0].name
 				const lastDot = inputName.lastIndexOf(".")
 				const inputExtension = inputName.substring(lastDot + 1)
 
 				const res = getFileData(logs)
+
+				setPrueba(logs)
 
 				await generatePreviewUrl(res.basicInfo[0], inputFile)
 
@@ -77,6 +82,8 @@ const VideoSuite: FC = () => {
 		const strArr = durationStr.split(":")
 		let minutes = Number(strArr[2])
 		let logs: string[] = []
+
+		console.log({ minutes, video })
 
 		if (!ffmpeg) {
 			throw new Error("Something went wrong...")
@@ -139,6 +146,11 @@ const VideoSuite: FC = () => {
 									velit expedita, iusto beatae excepturi ab. Reprehenderit,
 									perspiciatis dicta. A, voluptate!
 								</Grid>
+								{prueba.map((texto, i) => (
+									<Grid key={i} item xs={12}>
+										<p>{texto}</p>
+									</Grid>
+								))}
 								<Grid item xs={12}>
 									<Grid container>
 										<Grid item xs={8}>
