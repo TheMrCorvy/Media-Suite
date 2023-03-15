@@ -30,7 +30,6 @@ const VideoSuite: FC = () => {
 	const { getFileData } = useExtractLogsData()
 	const [ready, setReady] = useState(false)
 	const [previewUrl, setPreviewUrl] = useState("")
-	const [prueba, setPrueba] = useState<string[]>([])
 
 	useEffect(() => {
 		load().then(() => setReady(true))
@@ -54,33 +53,38 @@ const VideoSuite: FC = () => {
 		const inputFile = files[index ? index : 0]
 
 		const resFile = await fetchFile(inputFile)
-		console.log(resFile)
 
-		await ffmpeg.FS("writeFile", inputFile.name, resFile)
-		await ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
+		ffmpeg.FS("writeFile", inputFile.name, resFile)
+		ffmpeg.run("-i", inputFile.name, "-f", "ffmetadata", "metadata.txt")
 
-		await ffmpeg.setProgress(async ({ ratio }) => {
+		ffmpeg.setProgress(async ({ ratio }) => {
 			if (ratio === 1) {
-				const inputName = files[0].name
+				const inputName = inputFile.name
 				const lastDot = inputName.lastIndexOf(".")
 				const inputExtension = inputName.substring(lastDot + 1)
 
 				const res = getFileData(logs)
 
-				setPrueba(logs)
-
 				await generatePreviewUrl(res.basicInfo[0], inputFile)
 
 				console.log({ ...res, inputName, inputExtension, previewUrl })
-				setReady(true)
-				handleClose()
 			}
 		})
 	}
 
+	const createTimeStamp = (minutes: number, seconds: number) => {
+		if (minutes > 0) {
+			return `00:${Math.floor(Math.random() * minutes)}:00`
+		}
+
+		return `00:00:${Math.floor(Math.random() * seconds)}`
+	}
+
 	const generatePreviewUrl = async (durationStr: string, video: File) => {
 		const strArr = durationStr.split(":")
-		let minutes = Number(strArr[2])
+		const minutes = Number(strArr[2])
+		const seconds = Number(strArr[2])
+		const timeStamp = createTimeStamp(minutes, seconds)
 		let logs: string[] = []
 
 		console.log({ minutes, video })
@@ -97,7 +101,7 @@ const VideoSuite: FC = () => {
 		await ffmpeg.FS("writeFile", video.name, resFile)
 		await ffmpeg.run(
 			"-ss",
-			`00:${Math.floor(Math.random() * minutes)}:00`,
+			timeStamp,
 			"-i",
 			video.name,
 			"-frames:v",
@@ -112,6 +116,9 @@ const VideoSuite: FC = () => {
 				const data = ffmpeg.FS("readFile", "preview.jpg")
 				const url = URL.createObjectURL(new Blob([data.buffer], { type: "image/jpg" }))
 				setPreviewUrl(url)
+
+				setReady(true)
+				handleClose()
 			}
 		})
 	}
@@ -146,11 +153,6 @@ const VideoSuite: FC = () => {
 									velit expedita, iusto beatae excepturi ab. Reprehenderit,
 									perspiciatis dicta. A, voluptate!
 								</Grid>
-								{prueba.map((texto, i) => (
-									<Grid key={i} item xs={12}>
-										<p>{texto}</p>
-									</Grid>
-								))}
 								<Grid item xs={12}>
 									<Grid container>
 										<Grid item xs={8}>
@@ -216,7 +218,7 @@ const VideoSuite: FC = () => {
 				freeze
 			>
 				{!ready ? (
-					<Loader status={ready ? 100 : undefined} />
+					<Loader status={ready ? 100 : undefined} growingValue={5} />
 				) : (
 					<SelectFile
 						fileType="video"
